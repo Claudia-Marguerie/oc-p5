@@ -8,5 +8,16 @@
     "prod": "sass ./sass/main.scss ./css/style.css"
   },
   "author": "Claudia Marguerie",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Claudia-Marguerie/oc-p5.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Claudia-Marguerie/oc-p5/issues"
+  },
+  "homepage": "https://github.com/Claudia-Marguerie/oc-p5#readme",
+  "devDependencies": {
+    "sass": "^1.26.7"
+  }
 }
