@@ -1,0 +1,12 @@
+{
+  "name": "p5-orinoco",
+  "version": "1.0.0",
+  "description": "Orinoco",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sass ./sass/main.scss ./css/style.css --watch",
+    "prod": "sass ./sass/main.scss ./css/style.css"
+  },
+  "author": "Claudia Marguerie",
+  "license": "ISC"
+}
