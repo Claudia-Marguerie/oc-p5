@@ -41,10 +41,20 @@ header {
   color: #ffffff;
   font-family: "Nova Mono", sans-serif;
 }
+@media screen and (max-width: 599px) {
+  #logo {
+    font-size: 2.1em;
+  }
+}
 
 #pageframe {
   width: 80%;
   margin: auto;
+}
+@media screen and (max-width: 599px) {
+  #pageframe {
+    width: 90%;
+  }
 }
 
 nav {
@@ -64,6 +74,11 @@ nav {
   color: #000000;
   margin-left: 10px;
 }
+@media screen and (max-width: 599px) {
+  .menu {
+    font-size: 1em;
+  }
+}
 
 .panier {
   display: flex;
@@ -82,6 +97,11 @@ nav {
   height: 30px;
   margin-right: 10px;
 }
+@media screen and (max-width: 599px) {
+  .panier {
+    font-size: 1em;
+  }
+}
 
 .titre {
   border: solid 3px #85c6c8;
@@ -96,17 +116,27 @@ nav {
   font-family: selfie, sans-serif;
   font-weight: bolder;
 }
+@media screen and (max-width: 599px) {
+  .titre h2 {
+    font-size: 3.6em;
+  }
+}
 
 #app {
   padding-bottom: 100px;
 }
 
-#products {
+#list-products {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0;
   margin-top: 0;
+}
+@media screen and (max-width: 599px) {
+  #list-products {
+    justify-content: center;
+  }
 }
 
 .product-item {

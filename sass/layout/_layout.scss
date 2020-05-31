@@ -25,12 +25,18 @@ header {
   font-size: 2.6em;
   color: #ffffff;
   font-family: 'Nova Mono', sans-serif;
+  @media screen and (max-width: 599px) {
+    font-size: 2.1em;
+  }
 }
 
 // interior page
 #pageframe {
   width: 80%;
   margin: auto;
+  @media screen and (max-width: 599px) {
+    width: 90%;
+  }
 }
 
 // navigation
@@ -50,6 +56,9 @@ nav {
     color: #000000;
     margin-left: 10px;
   }
+  @media screen and (max-width: 599px) {
+    font-size: 1em;
+  }
 }
 
 .panier {
@@ -68,6 +77,9 @@ nav {
     height: 30px;
     margin-right: 10px;
   }
+  @media screen and (max-width: 599px) {
+    font-size: 1em;
+  }
 }
 
 // title
@@ -82,6 +94,9 @@ nav {
     font-size: 4em;
     font-family: selfie, sans-serif;
     font-weight: bolder;
+    @media screen and (max-width: 599px) {
+      font-size: 3.6em;
+    }
   }
 }
 
@@ -90,12 +105,15 @@ nav {
   padding-bottom: 100px;
 }
 
-#products {
+#list-products {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0;
   margin-top: 0;
+  @media screen and (max-width: 599px) {
+    justify-content: center;
+  }
 }
 
 .product-item {
