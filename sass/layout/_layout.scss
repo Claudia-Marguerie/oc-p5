@@ -109,12 +109,18 @@ nav {
   justify-content: space-between;
   padding: 0;
   margin-top: 0;
+  li {
+    list-style-type: none;
+  
+  }
   @media screen and (max-width: 750px) {
     justify-content: center;
   }
 }
 
 .product-item {
+  width: 300px;
+  height: 360px;
   position: relative;
   margin-bottom: 30px;
   overflow: hidden;
@@ -123,12 +129,11 @@ nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  li {
-    list-style-type: none;
+  img {
+    width: auto;
+    height: 360px;
   }
   a {
-    // margin: 0;
-    // padding: 0;
     text-decoration: none;
     text-decoration-color: none;
     // font-size: 1.4em;
@@ -143,30 +148,32 @@ nav {
 
 .product-name-price {
   position: absolute;
-  bottom: -80px;
+  bottom: -90px;
   background-color: rgba($color: $clr-secondary, $alpha: 0.7);
   width: 100%;
-  // height: 80px;
+  font-family: $typhography-primary;
   opacity: 0;
   transition: all 500ms ease-in-out;
   a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 90px;
+    color: #000000;
   }
   h3 {
-    font-size: 1.4em;
+    font-size: 1.3em;
+    line-height: 1.5;
     padding-left: 15px;
-    color: #000000;
-    font-family: $typhography-primary;
+    color:$clr-secondary-dark;
+    // font-family: $typhography-primary;
   }
   p {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: bolder;
     padding-right: 15px;
-    color: #000000;
-    font-family: $typhography-primary;
+    // color: #000000;
+    // font-family: $typhography-primary;
   }
 }
 
