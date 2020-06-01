@@ -250,8 +250,20 @@ footer {
   color: #ffffff;
 }
 
+@media screen and (max-width: 375px) {
+  nav {
+    font-size: 1em;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .menu a {
   text-decoration: none;
+}
+.menu .menu-item {
+  color: #000000;
+  margin-left: 10px;
 }
 
 #product {
@@ -262,35 +274,33 @@ footer {
   margin-top: 60px;
   font-family: "sinkin_sans300_light";
 }
-
-#product-image {
-  width: 340px;
+#product img {
+  width: auto;
+  max-width: 500px;
   height: 420px;
+  margin-right: 20px;
 }
-
-.product-information {
-  width: 340px;
-  height: 420px;
-  padding: 0 20px;
+@media screen and (max-width: 768px) {
+  #product {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #product img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 }
-.product-information h1 {
-  font-size: 2em;
-  margin: 0;
-}
-
-button {
-  background-color: #660906;
-  border: none;
-  color: #ffffff;
-  padding: 7px 40px;
-  margin-top: 120px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1.2em;
-  font-family: "sinkin_sans300_light";
-}
-button:hover {
-  background-color: rgba(102, 9, 6, 0.5);
+@media screen and (max-width: 425px) {
+  #product img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 }
 
 #product-description {
@@ -302,6 +312,49 @@ button:hover {
 #product-description h2 {
   font-size: 1.2em;
   margin: 0;
+}
+@media screen and (max-width: 768px) {
+  #product-description {
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+}
+
+.product-information {
+  width: 340px;
+  height: 420px;
+  padding: 0 20px;
+}
+.product-information h1 {
+  font-size: 2em;
+  margin: 0;
+}
+@media screen and (max-width: 768px) {
+  .product-information {
+    width: 500px;
+    height: auto;
+  }
+}
+
+button {
+  background-color: #660906;
+  border: none;
+  color: #ffffff;
+  padding: 7px 40px;
+  margin-top: 40px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-family: "sinkin_sans300_light";
+}
+button:hover {
+  background-color: rgba(102, 9, 6, 0.5);
+}
+@media screen and (max-width: 976px) {
+  button {
+    margin-bottom: 100px;
+  }
 }
 
 @font-face {

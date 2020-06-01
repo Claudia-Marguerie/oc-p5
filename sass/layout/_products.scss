@@ -6,12 +6,24 @@
     a {
         text-decoration: none;
         color: #ffffff;
-    };
+    }
+}
+
+nav {
+    @media screen and (max-width: 375px) {
+        font-size: 1em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .menu {
     a {
         text-decoration: none;
+    }
+    .menu-item {
+        color: #000000;
+        margin-left: 10px;
     }
 }
 
@@ -22,38 +34,31 @@
     height: 420px;
     margin-top: 60px;
     font-family: $typhography-primary;
-}
-
-#product-image {
-    // background-color: $clr-primary;
-    width: 340px;
-    height: 420px;
-}
-
-.product-information {
-    // background-color: $clr-primary;
-    width: 340px;
-    height: 420px;
-    padding: 0 20px;
-    h1 {
-        font-size: 2em;
-        margin: 0;
+    img {
+        width: auto;
+        max-width: 500px;
+        height: 420px;
+        margin-right: 20px;
     }
-}
-
-button {
-    background-color: $clr-primary-dark;
-    border: none;
-    color: #ffffff;
-    padding: 7px 40px;
-    margin-top: 120px;
-    text-align: center;
-    text-decoration: none;
-    // display: inline-block;
-    font-size: 1.2em;
-    font-family: $typhography-primary;
-    &:hover {
-        background-color: rgba($color: $clr-primary-dark, $alpha: 0.5);
+    @media screen and (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        img {
+            width: 100%;
+            height: auto;
+            margin-right: 0;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    }
+    @media screen and (max-width: 425px) {
+        img {
+            width: 100%;
+            height: auto;
+            margin-right: 0;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
     }
 }
 
@@ -65,5 +70,44 @@ button {
     h2 {
         font-size: 1.2em;
         margin: 0;
+    }
+    @media screen and (max-width: 768px) {
+        width: 500px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+.product-information {
+    // background-color: $clr-primary;
+    width: 340px;
+    height: 420px;
+    padding: 0 20px;
+    h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+    @media screen and (max-width: 768px) {
+        width: 500px;
+        height: auto;
+    }
+}
+
+button {
+    background-color: $clr-primary-dark;
+    border: none;
+    color: #ffffff;
+    padding: 7px 40px;
+    margin-top: 40px;
+    text-align: center;
+    text-decoration: none;
+    // display: inline-block;
+    font-size: 1.2em;
+    font-family: $typhography-primary;
+    &:hover {
+        background-color: rgba($color: $clr-primary-dark, $alpha: 0.5);
+    }
+    @media screen and (max-width: 976px) {
+        margin-bottom: 100px;
     }
 }
