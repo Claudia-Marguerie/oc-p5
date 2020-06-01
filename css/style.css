@@ -62,12 +62,12 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 80px;
+  font-size: 1.1em;
+  font-family: "sinkin_sans300_light";
 }
 
 .menu {
   display: flex;
-  font-size: 1.2em;
-  font-family: "sinkin_sans300_light";
   color: #c88785;
 }
 .menu--black {
@@ -84,8 +84,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2em;
-  font-family: "sinkin_sans300_light";
   text-transform: uppercase;
 }
 .panier a {
@@ -133,7 +131,7 @@ nav {
   padding: 0;
   margin-top: 0;
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 750px) {
   #list-products {
     justify-content: center;
   }
@@ -222,6 +220,103 @@ footer {
   margin: 10px;
 }
 
+@font-face {
+  font-family: "sinkin_sans300_light";
+  src: url("../fonts/SinkinSans-300Light-webfont.eot");
+  src: url("../fonts/SinkinSans-300Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/SinkinSans-300Light-webfont.woff2") format("woff2"), url("../fonts/SinkinSans-300Light-webfont.woff") format("woff"), url("../fonts/SinkinSans-300Light-webfont.ttf") format("truetype"), url("../fonts/SinkinSans-300Light-webfont.svg#sinkin_sans300_light") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Selfie";
+  src: url("../fonts/Selfie.eot");
+  src: url("../fonts/Selfie.eot?#iefix") format("embedded-opentype"), url("../fonts/Selfie.woff") format("woff"), url("../fonts/Selfie.ttf") format("truetype"), url("../fonts/Selfie.svg") format("svg");
+}
+@font-face {
+  font-family: "Nova Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/nova-mono-v10-latin-regular.eot");
+  src: local("NovaMono"), url("../fonts/nova-mono-v10-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/nova-mono-v10-latin-regular.woff2") format("woff2"), url("../fonts/nova-mono-v10-latin-regular.woff") format("woff"), url("../fonts/nova-mono-v10-latin-regular.ttf") format("truetype"), url("../fonts/nova-mono-v10-latin-regular.svg#NovaMono") format("svg");
+}
+#logo a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.menu a {
+  text-decoration: none;
+}
+
+#product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 420px;
+  margin-top: 60px;
+  font-family: "sinkin_sans300_light";
+}
+
+#product-image {
+  width: 340px;
+  height: 420px;
+}
+
+.product-information {
+  width: 340px;
+  height: 420px;
+  padding: 0 20px;
+}
+.product-information h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+button {
+  background-color: #660906;
+  border: none;
+  color: #ffffff;
+  padding: 7px 40px;
+  margin-top: 120px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-family: "sinkin_sans300_light";
+}
+button:hover {
+  background-color: rgba(102, 9, 6, 0.5);
+}
+
+#product-description {
+  background-color: rgba(133, 198, 200, 0.4);
+  width: 340px;
+  height: 420px;
+  padding: 20px;
+}
+#product-description h2 {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "sinkin_sans300_light";
+  src: url("../fonts/SinkinSans-300Light-webfont.eot");
+  src: url("../fonts/SinkinSans-300Light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/SinkinSans-300Light-webfont.woff2") format("woff2"), url("../fonts/SinkinSans-300Light-webfont.woff") format("woff"), url("../fonts/SinkinSans-300Light-webfont.ttf") format("truetype"), url("../fonts/SinkinSans-300Light-webfont.svg#sinkin_sans300_light") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Selfie";
+  src: url("../fonts/Selfie.eot");
+  src: url("../fonts/Selfie.eot?#iefix") format("embedded-opentype"), url("../fonts/Selfie.woff") format("woff"), url("../fonts/Selfie.ttf") format("truetype"), url("../fonts/Selfie.svg") format("svg");
+}
+@font-face {
+  font-family: "Nova Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/nova-mono-v10-latin-regular.eot");
+  src: local("NovaMono"), url("../fonts/nova-mono-v10-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/nova-mono-v10-latin-regular.woff2") format("woff2"), url("../fonts/nova-mono-v10-latin-regular.woff") format("woff"), url("../fonts/nova-mono-v10-latin-regular.ttf") format("truetype"), url("../fonts/nova-mono-v10-latin-regular.svg#NovaMono") format("svg");
+}
 @font-face {
   font-family: "sinkin_sans300_light";
   src: url("../fonts/SinkinSans-300Light-webfont.eot");

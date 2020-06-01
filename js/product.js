@@ -3,6 +3,9 @@ const params = new URLSearchParams(url.search);
 const ajax = new Ajax()
 const productId = params.get('id')
 
+let productTitlePage = document.querySelector('title');
+productTitlePage.textContent = product.name;
+
 function addToCart(product){
     console.log(product)
 }
