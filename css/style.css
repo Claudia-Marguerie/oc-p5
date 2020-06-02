@@ -337,11 +337,26 @@ footer {
   }
 }
 
+.dropdown label {
+  color: #c88785;
+  font-size: 1.1em;
+}
+
+select {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-family: "sinkin_sans300_light";
+  border: solid 1px #c88785;
+}
+
 button {
+  width: 100%;
   background-color: #660906;
   border: none;
   color: #ffffff;
-  padding: 7px 40px;
+  padding: 6px 40px;
   margin-top: 40px;
   text-align: center;
   text-decoration: none;

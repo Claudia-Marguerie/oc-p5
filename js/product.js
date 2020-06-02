@@ -15,6 +15,20 @@ function displayProduct(product){
     })
 }
 
+function displayProductOptions(product){
+    const listOptions = document.querySelector('#option-lentille');
+    for(let i = 0; i < product.lenses.length; i++){
+        const optionItem = document.createElement('option');
+        optionItem.innerHTML = '<option id="option-lentille" value="">' + product.lenses[i] +'</option>'
+        listOptions.appendChild(optionItem);
+    }
+}
+
+
+
+function addToCart(){
+    
+}
 
 // function displayProduct(product){
 //     document.querySelector('#product-name').textContent = product.name
@@ -27,5 +41,5 @@ function displayProduct(product){
 
 ajax.get('http://localhost:3000/api/cameras/' + productId).then((product) => {
     displayProduct(product)
-
+    displayProductOptions(product)
 })
