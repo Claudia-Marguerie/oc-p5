@@ -1,3 +1,92 @@
 @import "../components/fonts";
 @import "../components/variables";
 
+// Produits ajoutés au panier
+#mon-panier {
+    display: flex;
+    font-family: $typhography-primary;
+}
+
+#panier-products-formulaire {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-bottom: 120px;
+    #panier-items {
+        background-color: rgba($color: $clr-secondary, $alpha: 0.4);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .panier-product {
+            line-height: 0;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            img {
+                width: 240px;
+                height: auto;
+                margin: 10px 0;
+            }
+            p {
+                margin-top: 40px;
+            }
+        }
+    }
+}
+
+
+
+// Formulaire
+#formulaire {
+    background-color: rgba($color: $clr-primary, $alpha: 0.4);
+    padding: 40px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    form {
+        width: 100%;
+        .formulaire-item {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+        }
+        input {
+            margin-bottom: 20px;
+            height: 40px;
+            border: solid 2px $clr-primary;
+            border-radius: 12px;
+            padding-left: 10px;
+            font-size: 1em;
+        }
+    }
+    a {
+        width: 50%;
+    }
+}
+
+// Total panier
+#panier-total {
+    width: 30%;
+    height: auto;
+    padding: 20px;
+    .cout-panier {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        p {
+            margin: 0;
+        }
+        &--bold {
+            font-weight: bold;
+            color: $clr-secondary;
+        }
+        &--total {
+            margin-top: 40px;
+            font-weight: 900;
+        }
+    }
+}

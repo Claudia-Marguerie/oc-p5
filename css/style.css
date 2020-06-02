@@ -391,6 +391,91 @@ button:hover {
   src: url("../fonts/nova-mono-v10-latin-regular.eot");
   src: local("NovaMono"), url("../fonts/nova-mono-v10-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/nova-mono-v10-latin-regular.woff2") format("woff2"), url("../fonts/nova-mono-v10-latin-regular.woff") format("woff"), url("../fonts/nova-mono-v10-latin-regular.ttf") format("truetype"), url("../fonts/nova-mono-v10-latin-regular.svg#NovaMono") format("svg");
 }
+#mon-panier {
+  display: flex;
+  font-family: "sinkin_sans300_light";
+}
+
+#panier-products-formulaire {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-bottom: 120px;
+}
+#panier-products-formulaire #panier-items {
+  background-color: rgba(133, 198, 200, 0.4);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#panier-products-formulaire #panier-items .panier-product {
+  line-height: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+#panier-products-formulaire #panier-items .panier-product img {
+  width: 240px;
+  height: auto;
+  margin: 10px 0;
+}
+#panier-products-formulaire #panier-items .panier-product p {
+  margin-top: 40px;
+}
+
+#formulaire {
+  background-color: rgba(200, 135, 133, 0.4);
+  padding: 40px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#formulaire form {
+  width: 100%;
+}
+#formulaire form .formulaire-item {
+  display: flex;
+  flex-direction: column;
+}
+#formulaire form label {
+  margin-bottom: 10px;
+}
+#formulaire form input {
+  margin-bottom: 20px;
+  height: 40px;
+  border: solid 2px #c88785;
+  border-radius: 12px;
+  padding-left: 10px;
+  font-size: 1em;
+}
+#formulaire a {
+  width: 50%;
+}
+
+#panier-total {
+  width: 30%;
+  height: auto;
+  padding: 20px;
+}
+#panier-total .cout-panier {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#panier-total .cout-panier p {
+  margin: 0;
+}
+#panier-total .cout-panier--bold {
+  font-weight: bold;
+  color: #85c6c8;
+}
+#panier-total .cout-panier--total {
+  margin-top: 40px;
+  font-weight: 900;
+}
+
 @font-face {
   font-family: "sinkin_sans300_light";
   src: url("../fonts/SinkinSans-300Light-webfont.eot");
