@@ -15,18 +15,18 @@ function displayProduct(product){
     })
 }
 
-function displayProductOptions(product){ //fonction pour aller chercher chaque option de lentille de chaque produit
-    const listOptions = document.querySelector('#option-lentille'); //l'endroit où la fonction va accéder aux éléments du DOM 
-    for(let i = 0; i < product.lenses.length; i++){ //boucle pour aller chercher chaque option
-        const optionItem = document.createElement('option'); //va créer un nouveau élément
-        optionItem.innerHTML = '<option id="option-lentille" value="">' + product.lenses[i] +'</option>' //la structure qui va créer en HTML avec chaque option
-        listOptions.appendChild(optionItem); //une option après l'autre
+function displayProductOptions(product){ 
+    const listOptions = document.querySelector('#option-lentille'); 
+    for(let i = 0; i < product.lenses.length; i++){ 
+        const optionItem = document.createElement('option'); 
+        optionItem.innerHTML = '<option id="option-lentille" value="">' + product.lenses[i] +'</option>' 
+        listOptions.appendChild(optionItem); 
     }
 }
 
-function addToCart(){
-    
-}
+// function addToCart(productId){
+//     const productAdded = 
+// }
 
 // function displayProduct(product){
 //     document.querySelector('#product-name').textContent = product.name

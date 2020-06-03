@@ -5,7 +5,7 @@ function displayProduct(product){
     const productListItem = document.createElement('li');
     productListItem.innerHTML = '<div class="product-item">'+'<a href="product.html?id='+ product._id +'"><img src="' + product.imageUrl + '"alt=""></a>' +
     '<div class="product-name-price">'+'<a href="product.html?id='+ product._id +'">' + '<h3 class= "product-name">' + product.name + '</h3>'+
-    '<p class="product-price">'+ product.price + '€</p>'+ '</a>'+'</div>'+'</div>'
+    '<p class="product-price">'+ product.price + ' €</p>'+ '</a>'+'</div>'+'</div>'
     listProduct.appendChild(productListItem);
 }
 
@@ -33,6 +33,3 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
 }, (err) => {
     console.log(err)
 })
-
-
-

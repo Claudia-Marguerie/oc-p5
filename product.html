@@ -28,10 +28,13 @@
             </div>
         </nav>
         <div id="product">
-            <img id="product-image" src="" alt="">
+            <div class="image-item">
+                <img id="product-image" src="" alt=""> 
+                <!-- ici s'affiche l'image de chaque produit selon son ID -->
+            </div>
             <div id="product-description">
                 <h2>Description :</h2>
-                <p>texte texte</p>
+                <p><!-- ici il y a la description de chaque produit selon son ID--></p>
             </div>
             <div class="product-information">
                 <h1 id="product-name"></h1>
@@ -40,7 +43,7 @@
                     <label for="lentilles">Lentilles :</label>
                     <select id="option-lentille" name="lentilles" id="lentilles">
                         <option value="">Choissisez une option</option>
-                        <!-- <option value=""></option> -->
+                        <!-- Option lentille affiché par JS pour chaque produit -->
                     </select>
                 </div>
                 <button id="add-cart">Ajouter au panier</button>

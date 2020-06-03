@@ -9,6 +9,7 @@
     }
 }
 
+// menu
 nav {
     @media screen and (max-width: 375px) {
         font-size: 1em;
@@ -27,6 +28,7 @@ nav {
     }
 }
 
+// Product information
 #product {
     display: flex;
     justify-content: space-between;
@@ -34,11 +36,21 @@ nav {
     height: 420px;
     margin-top: 60px;
     font-family: $typhography-primary;
-    img {
-        width: auto;
-        max-width: 500px;
+    .image-item {
+        width: 500px;
         height: 420px;
         margin-right: 20px;
+        overflow: hidden;
+        // position: relative;
+        // right: -50%;
+        #product-image {
+            width: auto;
+            height: 420px;
+            position: relative;
+            left: 50%;
+            margin-left: -320px;
+            // margin-right: 20px;
+        }
     }
     @media screen and (max-width: 768px) {
         flex-wrap: wrap;

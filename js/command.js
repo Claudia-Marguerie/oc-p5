@@ -1,0 +1,2 @@
+const ajax = new Ajax()
+

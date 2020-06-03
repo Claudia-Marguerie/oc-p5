@@ -1,0 +1,40 @@
+@import "../components/fonts";
+@import "../components/variables";
+
+.command-text {
+    font-family: $typhography-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 7em;
+        font-weight: bolder;
+        color: $clr-secondary;
+        font-family: selfie;
+        margin: 0;
+    }
+    .validation-text {
+        border: solid 3px $clr-secondary;
+        margin-top: -53px;
+        padding: 30px;
+        h2 {
+            text-align: center;
+        }
+        .data-command {
+            display: flex;
+            p {
+                margin-right: 10px;
+            }
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $clr-secondary;
+        font-weight: bolder;
+        &:hover {
+            color: $clr-secondary-dark;
+            text-shadow: 0 0 3px $clr-secondary;
+        }
+    }
+}

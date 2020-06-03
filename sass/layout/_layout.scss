@@ -132,10 +132,14 @@ nav {
   img {
     width: auto;
     height: 360px;
+    position: relative;
+    left: -23%;
   }
   a {
     text-decoration: none;
     text-decoration-color: none;
+    // position: relative;
+    // right: -50%;
     // font-size: 1.4em;
   }
   &:hover {
@@ -163,15 +167,18 @@ nav {
   }
   h3 {
     font-size: 1.3em;
-    line-height: 1.5;
+    line-height: 1.5em;
     padding-left: 15px;
     color:$clr-secondary-dark;
+    width: 50%;
     // font-family: $typhography-primary;
   }
   p {
     font-size: 1.3em;
+    line-height: 1.5em;
     font-weight: bolder;
     padding-right: 15px;
+    width: 50%;
     // color: #000000;
     // font-family: $typhography-primary;
   }
