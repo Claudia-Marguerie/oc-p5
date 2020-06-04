@@ -1,66 +1,66 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="">
+        <title></title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="">
-    <title></title>
-</head>
-
-<body>
-    <header>
-        <div id="logo">
-            <a href="index.html"><h1>Orinoco</h1></a>
-        </div>
-    </header>
-    <div id="pageframe">
-        <nav>
-            <div class="menu">
-                <p>ESHOP /</p>
-                <a href="index.html"><p class="menu--black">Caméras vintage /</p></a>
-                <p class="menu-item"></p>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="index.html"><h1>Orinoco</h1></a>
             </div>
-            <div class="panier">
-                <img src="images/shopping-cart.svg" alt="Pictogramme Panier">
-                <a href="cart.html"><p>Panier ( <strong>0</strong> )</p></a>
-            </div>
-        </nav>
-        <div id="product">
-            <div class="image-item">
-                <img id="product-image" src="" alt=""> 
-                <!-- ici s'affiche l'image de chaque produit selon son ID -->
-            </div>
-            <div id="product-description">
-                <h2>Description :</h2>
-                <p><!-- ici il y a la description de chaque produit selon son ID--></p>
-            </div>
-            <div class="product-information">
-                <h1 id="product-name"></h1>
-                <p id="product-price"></p>
-                <div class="dropdown">
-                    <label for="lentilles">Lentilles :</label>
-                    <select id="option-lentille" name="lentilles" id="lentilles">
-                        <option value="">Choissisez une option</option>
-                        <!-- Option lentille affiché par JS pour chaque produit -->
-                    </select>
+        </header>
+        <div id="pageframe">
+            <nav>
+                <div class="menu">
+                    <p>ESHOP /</p>
+                    <a href="index.html"><p class="menu--black">Caméras vintage /</p></a>
+                    <p class="menu-item"> <!--Nom du produit--> </p>
                 </div>
-                <button id="add-cart">Ajouter au panier</button>
+                <div class="panier">
+                    <img src="images/shopping-cart.svg" alt="Pictogramme Panier">
+                    <a href="cart.html"><p>Panier ( <strong id="cart-item-quantity">0</strong> )</p></a>
+                </div>
+            </nav>
+            <div id="product">
+                <div class="image-item">
+                    <img id="product-image" src="" alt=""> 
+                    <!-- ici s'affiche l'image de chaque produit selon son ID -->
+                </div>
+                <div id="product-description">
+                    <h2>Description :</h2>
+                    <p><!-- ici il y a la description de chaque produit selon son ID--></p>
+                </div>
+                <div class="product-information">
+                    <h1 id="product-name"></h1>
+                    <p id="product-price"></p>
+                    <div class="dropdown">
+                        <label for="lentilles">Lentilles :</label>
+                        <select id="option-lentille" name="lentilles" id="lentilles">
+                            <option value="">Choissisez une option</option>
+                            <!-- Option lentille affiché par JS pour chaque produit -->
+                        </select>
+                    </div>
+                    <button id="add-cart">Ajouter au panier</button>
+                </div>
             </div>
         </div>
-    </div>
-    <footer>
-        <div class="social">
-            <div>
-                <a href="" target="_blank"><img src="images/logo_facebook.svg" alt="Logo Instagram"></a>
+        <footer>
+            <div class="social">
+                <div>
+                    <a href="" target="_blank"><img src="images/logo_facebook.svg" alt="Logo Instagram"></a>
+                </div>
+                <div>
+                    <a href="" target="_blank"><img src="images/logo_instagram.svg" alt="Logo Facebook"></a>
+                </div>
             </div>
-            <div>
-                <a href="" target="_blank"><img src="images/logo_instagram.svg" alt="Logo Facebook"></a>
-            </div>
-        </div>
-    </footer>
-    <script type="application/javascript" src="js/ajax.js"></script>
-    <script type="application/javascript" src="js/product.js"></script>
-</body>
+        </footer>
+        <script type="application/javascript" src="js/ajax.js"></script>
+        <script type="application/javascript" src="js/product.js"></script>
+    </body>
 </html>

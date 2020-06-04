@@ -169,7 +169,7 @@ nav {
 .product-name-price {
   position: absolute;
   bottom: -90px;
-  background-color: rgba(133, 198, 200, 0.7);
+  background-color: rgba(133, 198, 200, 0.8);
   width: 100%;
   font-family: "sinkin_sans300_light";
   opacity: 0;
@@ -180,13 +180,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 90px;
-  color: #000000;
+  color: #054448;
 }
 .product-name-price h3 {
   font-size: 1.3em;
   line-height: 1.5em;
   padding-left: 15px;
-  color: #054448;
+  color: #000000;
   width: 50%;
 }
 .product-name-price p {
@@ -255,7 +255,7 @@ footer {
   color: #ffffff;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 425px) {
   nav {
     font-size: 1em;
     flex-direction: column;
@@ -291,6 +291,17 @@ footer {
   position: relative;
   left: 50%;
   margin-left: -320px;
+  transform: scale(1);
+  transition: all 500ms ease-in-out;
+}
+#product .image-item #product-image:hover {
+  transform: scale(1.4);
+}
+@media screen and (max-width: 768px) {
+  #product .image-item {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 @media screen and (max-width: 768px) {
   #product {

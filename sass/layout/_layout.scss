@@ -153,7 +153,7 @@ nav {
 .product-name-price {
   position: absolute;
   bottom: -90px;
-  background-color: rgba($color: $clr-secondary, $alpha: 0.7);
+  background-color: rgba($color: $clr-secondary, $alpha: 0.8);
   width: 100%;
   font-family: $typhography-primary;
   opacity: 0;
@@ -163,13 +163,14 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 90px;
-    color: #000000;
+    color: $clr-secondary-dark;
   }
   h3 {
     font-size: 1.3em;
     line-height: 1.5em;
     padding-left: 15px;
-    color:$clr-secondary-dark;
+    // color:$clr-secondary-dark;
+    color: #000000;
     width: 50%;
     // font-family: $typhography-primary;
   }
