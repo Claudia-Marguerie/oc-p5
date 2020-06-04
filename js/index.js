@@ -16,6 +16,11 @@ function displayTextEnd(){
     listProduct.appendChild(textBoxEnd);
 }
 
+function displayCartNumber() {
+    CartContent = Number (sessionStorage.getItem('storedCartContent'));
+    document.querySelector('#cart-item-quantity').textContent = CartContent
+}
+
 // // function displayProduct(product){
 // //     const ul = document.querySelector('#list-products');
 // //     const li = document.createElement('li');
@@ -29,6 +34,7 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
     for(let i = 0; i < products.length; i++){
         displayProduct(products[i])
     }
+    displayCartNumber()
     displayTextEnd()
 }, (err) => {
     console.log(err)

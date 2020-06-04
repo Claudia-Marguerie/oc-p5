@@ -13,6 +13,7 @@ function displayProduct(product){
     document.querySelector('#add-cart').addEventListener('click', () => {
         addToCart(product)
     })
+    displayCartNumber()
 }
 
 function displayProductOptions(product){ 
@@ -32,6 +33,11 @@ function addToCart(product){
     document.querySelector('#cart-item-quantity').textContent = updateStoredCartContent
 }
 
+function displayCartNumber() {
+    CartContent = Number (sessionStorage.getItem('storedCartContent'));
+    document.querySelector('#cart-item-quantity').textContent = CartContent
+}
+
 // function clickCounter(addToCart){
 //     if (typeof (Storage) !== "undefined") {
 //         if (sessionStorage.clickcount) {
@@ -45,17 +51,21 @@ function addToCart(product){
 // }
 
 
- function cartInit(){
-    sessionStorage.clear();
-    let storedCartContent = new Number (0);
-    sessionStorage.setItem('storedCartContent', storedCartContent);
- }
-
-
-
 // function saveCart(){
-//     sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+//     sessionStorage.setItem('shoppingCart', JSON.stringify(updateStoredCartContent));
 // }
+
+
+
+// function cartInit(){
+//     sessionStorage.clear();
+//     let storedCartContent = new Number (0);
+//     sessionStorage.setItem('storedCartContent', storedCartContent);
+//  }
+
+
+
+
 
 // function itemCart(name, price, count) {
 //     this.name = name;
