@@ -66,16 +66,6 @@ function displayCartNumber() {
 
 
 
-
-// function itemCart(name, price, count) {
-//     this.name = name;
-//     this.price = price;
-//     this.count = count;
-// }
-
-
-
-
 // function displayProduct(product){
 //     document.querySelector('#product-name').textContent = product.name
 //     document.querySelector('#product-image').setAttribute('src', product.imageUrl)

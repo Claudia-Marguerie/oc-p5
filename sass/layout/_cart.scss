@@ -4,14 +4,23 @@
 // Produits ajoutés au panier
 #mon-panier {
     display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: $typhography-primary;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 #panier-products-formulaire {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    // align-items: center;
+    width: 80%;
     margin-bottom: 120px;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
     #panier-items {
         background-color: rgba($color: $clr-secondary, $alpha: 0.4);
         margin-bottom: 20px;
@@ -27,9 +36,28 @@
                 width: 240px;
                 height: auto;
                 margin: 10px 0;
+                @media screen and (max-width: 768px) {
+                    width: 180px;
+                }
             }
             p {
                 margin-top: 40px;
+            }
+        }
+        .remove-product {
+            width: 15%;
+            height: 140px;
+            margin: 0;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba($color: $clr-secondary, $alpha: 0);
+            img {
+                width: 25px;
+            }
+            &:hover {
+                background-color: $clr-secondary;
             }
         }
     }
@@ -70,23 +98,37 @@
 
 // Total panier
 #panier-total {
-    width: 30%;
+    // width: 30%;
     height: auto;
-    padding: 20px;
-    .cout-panier {
+    margin: 30px;
+    display: flex;
+    justify-content: space-between;
+    .sous-total {
+        width: 50%;
+        .cout-panier {
+            display: flex;
+            // justify-content: space-between;
+            // margin-bottom: 20px;
+            &--bold {
+                font-weight: bold;
+                color: $clr-secondary;
+            }
+            &--total {
+                margin-left: 40px;
+            }
+        }
+    }
+    .total {
+        width: 20%;
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        p {
-            margin: 0;
-        }
-        &--bold {
-            font-weight: bold;
-            color: $clr-secondary;
-        }
-        &--total {
-            margin-top: 40px;
-            font-weight: 900;
+        font-weight: 900;
+        // justify-content: end;
+        align-items: flex-end;
+        .panier-total {
+            display: flex;
+            &--cost {
+                margin-left: 40px;
+            }
         }
     }
 }

@@ -416,14 +416,26 @@ button:hover {
 }
 #mon-panier {
   display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "sinkin_sans300_light";
+}
+@media screen and (max-width: 768px) {
+  #mon-panier {
+    flex-direction: column;
+  }
 }
 
 #panier-products-formulaire {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 80%;
   margin-bottom: 120px;
+}
+@media screen and (max-width: 768px) {
+  #panier-products-formulaire {
+    width: 100%;
+  }
 }
 #panier-products-formulaire #panier-items {
   background-color: rgba(133, 198, 200, 0.4);
@@ -443,8 +455,29 @@ button:hover {
   height: auto;
   margin: 10px 0;
 }
+@media screen and (max-width: 768px) {
+  #panier-products-formulaire #panier-items .panier-product img {
+    width: 180px;
+  }
+}
 #panier-products-formulaire #panier-items .panier-product p {
   margin-top: 40px;
+}
+#panier-products-formulaire #panier-items .remove-product {
+  width: 15%;
+  height: 140px;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(133, 198, 200, 0);
+}
+#panier-products-formulaire #panier-items .remove-product img {
+  width: 25px;
+}
+#panier-products-formulaire #panier-items .remove-product:hover {
+  background-color: #85c6c8;
 }
 
 #formulaire {
@@ -478,25 +511,35 @@ button:hover {
 }
 
 #panier-total {
-  width: 30%;
   height: auto;
-  padding: 20px;
-}
-#panier-total .cout-panier {
+  margin: 30px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
-#panier-total .cout-panier p {
-  margin: 0;
+#panier-total .sous-total {
+  width: 50%;
 }
-#panier-total .cout-panier--bold {
+#panier-total .sous-total .cout-panier {
+  display: flex;
+}
+#panier-total .sous-total .cout-panier--bold {
   font-weight: bold;
   color: #85c6c8;
 }
-#panier-total .cout-panier--total {
-  margin-top: 40px;
+#panier-total .sous-total .cout-panier--total {
+  margin-left: 40px;
+}
+#panier-total .total {
+  width: 20%;
+  display: flex;
   font-weight: 900;
+  align-items: flex-end;
+}
+#panier-total .total .panier-total {
+  display: flex;
+}
+#panier-total .total .panier-total--cost {
+  margin-left: 40px;
 }
 
 @font-face {
