@@ -17,8 +17,13 @@ function displayTextEnd(){
 }
 
 function displayCartNumber() {
-    CartContent = Number (sessionStorage.getItem('storedCartContent'));
-    document.querySelector('#cart-item-quantity').textContent = CartContent
+    let cartContent = localStorage.getItem('storedCartContent')
+    if (cartContent == null){
+        cartContent = []
+    } else {
+        cartContent = JSON.parse(cartContent)
+    }
+    document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
 
 // // function displayProduct(product){

@@ -47,6 +47,9 @@ nav {
   height: 80px;
   font-size: 1.1em;
   font-family: $typhography-primary;
+  @media screen and (max-width: 648px) {
+    height: 100px;
+  }
 }
 
 .menu {
@@ -74,9 +77,6 @@ nav {
     width: 35px;
     height: 30px;
     margin-right: 10px;
-  }
-  @media screen and (max-width: 599px) {
-    font-size: 1em;
   }
 }
 

@@ -1,15 +1,18 @@
 @import "../components/fonts";
 @import "../components/variables";
 
+.titre {
+    @media screen and (max-width: 425px) {
+        margin-top: 50px;
+    }
+}
+
 // Produits ajoutés au panier
 #mon-panier {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: $typhography-primary;
-    @media screen and (max-width: 768px) {
-        flex-direction: column;
-    }
 }
 
 #panier-products-formulaire {
@@ -18,7 +21,10 @@
     // align-items: center;
     width: 80%;
     margin-bottom: 120px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
+        width: 100%;
+    }
+    @media screen and (max-width: 998px) {
         width: 100%;
     }
     #panier-items {
@@ -27,42 +33,71 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        // @media screen and (max-width: 768px) {
+        //     font-size: 0.8em;
+        // }
+        @media screen and (max-width: 998px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
         .panier-product {
             line-height: 0;
             display: flex;
             flex-direction: column;
             text-align: center;
+            @media screen and (max-width: 998px) {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                text-align: start;
+                .product-info {
+                    width: 50%;
+                    padding-left: 30px;
+                }
+            }
             img {
                 width: 240px;
                 height: auto;
                 margin: 10px 0;
-                @media screen and (max-width: 768px) {
-                    width: 180px;
-                }
+                // @media screen and (max-width: 998px) {
+                //     width: 180px;
+                // }
             }
             p {
                 margin-top: 40px;
-            }
-        }
-        .remove-product {
-            width: 15%;
-            height: 140px;
-            margin: 0;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba($color: $clr-secondary, $alpha: 0);
-            img {
-                width: 25px;
-            }
-            &:hover {
-                background-color: $clr-secondary;
+                @media screen and (max-width: 998px) {
+                    margin: 0;
+                }
             }
         }
     }
 }
 
+.btn-remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+        width: auto;
+        height: 140px;
+        margin: 0;
+        padding: 8px;
+        background-color: rgba($color: $clr-secondary, $alpha: 0);
+        @media screen and (max-width: 998px) {
+            height: 80px;
+            padding: 0 20px;
+        }
+        &:hover {
+            background-color: $clr-secondary;
+        }
+    }
+    img {
+        width: 25px;
+    }
+}
 
 
 // Formulaire
@@ -93,6 +128,9 @@
     }
     a {
         width: 50%;
+        button {
+            margin: 20px 0 0 0;
+        }
     }
 }
 
@@ -100,11 +138,18 @@
 #panier-total {
     // width: 30%;
     height: auto;
-    margin: 30px;
+    margin: 10px 30px 30px 30px;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 998px) {
+        flex-direction: column;
+        width: 100%;
+    }
     .sous-total {
         width: 50%;
+        @media screen and (max-width: 998px) {
+            width: 100%;
+        }
         .cout-panier {
             display: flex;
             // justify-content: space-between;
@@ -119,11 +164,14 @@
         }
     }
     .total {
-        width: 20%;
+        width: 30%;
         display: flex;
         font-weight: 900;
         // justify-content: end;
         align-items: flex-end;
+        @media screen and (max-width: 998px) {
+            width: 100%;
+        }
         .panier-total {
             display: flex;
             &--cost {

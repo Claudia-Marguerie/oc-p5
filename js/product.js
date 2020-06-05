@@ -20,40 +20,37 @@ function displayProductOptions(product){
     const listOptions = document.querySelector('#option-lentille'); 
     for(let i = 0; i < product.lenses.length; i++){ 
         const optionItem = document.createElement('option'); 
-        optionItem.innerHTML = '<option id="option-lentille" value="">' + product.lenses[i] +'</option>' 
+        optionItem.setAttribute("value", product.lenses[i])
+        optionItem.innerHTML = product.lenses[i] 
         listOptions.appendChild(optionItem); 
     }
 }
 
 function addToCart(product){
-    CartContent = Number (sessionStorage.getItem('storedCartContent'));
-    const quantity = 1; 
-    const updateStoredCartContent = CartContent + quantity;
-    sessionStorage.setItem ('storedCartContent', updateStoredCartContent)
-    document.querySelector('#cart-item-quantity').textContent = updateStoredCartContent
+    let cartContent = localStorage.getItem('storedCartContent')
+    if (cartContent == null){
+        cartContent = []
+    } else {
+        cartContent = JSON.parse(cartContent)
+    }
+    cartContent.push({
+        id: product._id, lense: document.querySelector("#option-lentille").value
+    })
+    localStorage.setItem("storedCartContent", JSON.stringify(cartContent))
+    document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
 
 function displayCartNumber() {
-    CartContent = Number (sessionStorage.getItem('storedCartContent'));
-    document.querySelector('#cart-item-quantity').textContent = CartContent
+    let cartContent = localStorage.getItem('storedCartContent')
+    if (cartContent == null){
+        cartContent = []
+    } else {
+        cartContent = JSON.parse(cartContent)
+    }
+    document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
 
-// function clickCounter(addToCart){
-//     if (typeof (Storage) !== "undefined") {
-//         if (sessionStorage.clickcount) {
-//             sessionStorage.clickcount = Number (sessionStorage.clickcount) + 1 {
-//             } else {
-//                 sessionStorage.clickcount = 1;
-//             }
-//             document.getElementById("#cart-item-quantity").innerHTML = sessionStorage.clickcount;
-//         }
-//     }
-// }
 
-
-// function saveCart(){
-//     sessionStorage.setItem('shoppingCart', JSON.stringify(updateStoredCartContent));
-// }
 
 
 
