@@ -1,4 +1,5 @@
 const ajax = new Ajax()
+// localStorage.clear()
 
 function getCartFromLocal() { // récupère les produits du stockage local
     let cartContentLocal = localStorage.getItem('storedCartContent')
@@ -108,22 +109,55 @@ function listProducts(products, cartItems) {
 }
 
 function displayCartItems(consolidatedListItem, itemServerInformation) {
-    document.querySelector('.product-image').setAttribute('src', itemServerInformation.imageUrl)
-    // document.querySelector('title').textContent = product.name
-    // document.querySelector('.menu p.menu-item').textContent = product.name
-    // document.querySelector('#product-name').textContent = product.name
-    
-    // document.querySelector('#product-price').textContent = product.price + ' €'
-
-
-
-
-    // const listProduct = document.querySelector('#list-products');
-    // const productListItem = document.createElement('li');
-    // productListItem.innerHTML = '<div class="product-item">'+'<a href="product.html?id='+ product._id +'"><img src="' + product.imageUrl + '"alt=""></a>' +
-    // '<div class="product-name-price">'+'<a href="product.html?id='+ product._id +'">' + '<h3 class= "product-name">' + product.name + '</h3>'+
-    // '<p class="product-price">'+ product.price + ' €</p>'+ '</a>'+'</div>'+'</div>'
-    // listProduct.appendChild(productListItem);
+    const listProduct = document.querySelector('#product-display-zone');
+    const productListItem = document.createElement('div');
+    let lenseText = consolidatedListItem.lense; // 
+    if (lenseText == "") {
+        lenseText = "-"
+    }
+    console.log(lenseText)
+    productListItem.innerHTML = 
+                '<div id="panier-items">'+                
+                    '<div class="panier-product">'+
+                        '<img class="product-image" src="' + itemServerInformation.imageUrl + '" alt="">'+
+                    '</div>'+
+                    '<div class="panier-product">'+
+                        '<div class="product-info">'+
+                            '<h3>PRODUIT</h3>'+
+                        '</div>'+
+                        '<div class="product-info">'+
+                            '<p class="product-name">' + itemServerInformation.name + '</p>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="panier-product">'+
+                        '<div class="product-info">'+
+                            '<h3>QTE</h3>'+
+                        '</div>'+
+                        '<div class="product-info">'+
+                            '<p class="product-quantity">' + consolidatedListItem.quantity + '</p>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="panier-product">'+
+                        '<div class="product-info">'+
+                            '<h3>LENTILLE</h3>'+
+                        '</div>'+
+                        '<div class="product-info">'+
+                            '<p class="product-quantity">' + lenseText + '</p>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="panier-product">'+
+                        '<div class="product-info">'+
+                            '<h3>PRIX</h3>'+
+                        '</div>'+
+                        '<div class="product-info">'+
+                            '<p class="product-price">' + itemServerInformation.price + '</p>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="btn-remove">'+
+                        '<button><img src="images/trash.png" alt="Picto supprimer"></button>'+
+                    '</div>'+
+                '</div>'
+    listProduct.appendChild(productListItem);
 }
 
 
@@ -135,11 +169,11 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
     console.log(products)
     for(let i = 0; i < sortedProductList.length; i++){
         let y = searchSameId2(sortedProductList[i].id, products);
-        console.log(products[y])
-        console.log(sortedProductList[i])
+        // console.log(products[y])
+        // console.log(sortedProductList[i])
         displayCartItems(sortedProductList[i], products[y]);
-        console.log(sortedProductList[i].id);
-        console.log(y);
+        // console.log(sortedProductList[i].id);
+        // console.log(y);
     }
 }, (err) => {
     console.log(err)
