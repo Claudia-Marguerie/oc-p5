@@ -53,6 +53,7 @@
                 justify-content: space-around;
                 align-items: center;
                 text-align: start;
+                line-height: 1.5em;
                 .product-info {
                     width: 50%;
                     padding-left: 30px;
@@ -128,6 +129,9 @@
     }
     a {
         width: 50%;
+        @media screen and (max-width: 425px) {
+            width: 70%;
+        }
         button {
             margin: 20px 0 0 0;
         }
@@ -180,6 +184,24 @@
         }
     }
 }
+
+.remove-all {
+    display: flex;
+    justify-content: flex-end;
+    button {
+        width: 220px;
+        margin-top: 10px;
+        font-size: 1em;
+        background-color: $clr-secondary-dark;
+        &:hover {
+            background-color: $clr-secondary;
+        }
+        @media screen and (max-width: 998px) {
+            margin-bottom: 10px;
+        }
+    }
+}
+
 
 // .image-info {
 //     display: flex;

@@ -116,7 +116,7 @@ function listProducts(products, cartItems) {
 }
 
 
-function displayCartItems(consolidatedListItem, itemServerInformation, itemTypeCost) { // Affichage de chaque produit selectioné dans le panier dans le DOM
+function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTypeCost) { // Affichage de chaque produit selectioné dans le panier dans le DOM
     const listProduct = document.querySelector('#product-display-zone'); // on défine l'endroit où il va afecter le HTML
     const productListItem = document.createElement('div'); // on démande de créer une balise <div>
     
@@ -170,12 +170,11 @@ function displayCartItems(consolidatedListItem, itemServerInformation, itemTypeC
                         '</div>'+
                     '</div>'+
                     '<div class="btn-remove">'+
-                        '<button id="delete-product"><img src="images/trash.png" alt="Picto supprimer"></button>'+
+                        '<button id="delete-product' + i +'"><img src="images/trash.png" alt="Picto supprimer"></button>'+
                     '</div>'+
                 '</div>'
     listProduct.appendChild(productListItem);
 }
-
 
 function displayTotalCost(totalCost){
     document.querySelector('.total-cost').textContent = totalCost + ' €'
@@ -183,14 +182,21 @@ function displayTotalCost(totalCost){
 }
 
 
-function deleteProduct(consolidatedList, storedCartContent, displayCartItems){
-    
-}
+// function createRemoveButton(i){
+//     let buttonClass = '#delete-product' + i;
+//     console.log(buttonClass)
+//     document.querySelector(buttonClass).addEventListener('click', () => {
+//     //deleteProduct(i)
+//     console.log(i)
+//     })
+// }
 
-// le placer après dans le display product
-// document.querySelector('#delete-product').addEventListener('click', () => {
-//     deleteProduct()
-// })
+function clickDelete(i){
+    document.querySelector('#delete-product'+i).addEventListener('click', () => {
+    console.log('"button' + i + 'clické"')
+        
+    })
+}
 
 
 ajax.get('http://localhost:3000/api/cameras').then((products) => {
@@ -207,13 +213,13 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
         totalCost = totalCost + itemTypeCost;
         // console.log(products[y])
         // console.log(sortedProductList[i]
-        displayCartItems(sortedProductList[i], products[y],itemTypeCost);
+        displayCartItems(i, sortedProductList[i], products[y],itemTypeCost);
         // console.log(sortedProductList[i].id);
         // console.log(y);
+        clickDelete(i)
     }
     console.log(totalCost)
     displayTotalCost(totalCost)
-    
 }, (err) => {
     console.log(err)
 })

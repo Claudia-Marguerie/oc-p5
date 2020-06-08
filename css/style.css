@@ -476,6 +476,7 @@ button:hover {
     justify-content: space-around;
     align-items: center;
     text-align: start;
+    line-height: 1.5em;
   }
   #panier-products-formulaire #panier-items .panier-product .product-info {
     width: 50%;
@@ -550,6 +551,11 @@ button:hover {
 #formulaire a {
   width: 50%;
 }
+@media screen and (max-width: 425px) {
+  #formulaire a {
+    width: 70%;
+  }
+}
 #formulaire a button {
   margin: 20px 0 0 0;
 }
@@ -602,6 +608,25 @@ button:hover {
   margin-left: 40px;
 }
 
+.remove-all {
+  display: flex;
+  justify-content: flex-end;
+}
+.remove-all button {
+  width: 220px;
+  margin-top: 10px;
+  font-size: 1em;
+  background-color: #054448;
+}
+.remove-all button:hover {
+  background-color: #85c6c8;
+}
+@media screen and (max-width: 998px) {
+  .remove-all button {
+    margin-bottom: 10px;
+  }
+}
+
 @font-face {
   font-family: "sinkin_sans300_light";
   src: url("../fonts/SinkinSans-300Light-webfont.eot");
@@ -649,6 +674,11 @@ button:hover {
 }
 .command-text .validation-text .data-command p {
   margin-right: 10px;
+}
+@media screen and (max-width: 768px) {
+  .command-text .validation-text {
+    margin-bottom: 100px;
+  }
 }
 .command-text a {
   text-decoration: none;
