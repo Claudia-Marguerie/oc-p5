@@ -19,7 +19,7 @@ function displayCartNumber(cartContent) { // affichage le numéro d'articles dan
 }
 
 
-function searchSameId(searchedId, objectList) { // Cherche les poduits avec même ID 
+function searchSameId(searchedId, objectList) { // Cherche les poduits avec même ID dans le local storage ou la liste consolidée
     let searchResult = []
     for (let i = 0; i < objectList.length; i++) {
         if (objectList[i].id === searchedId) { // Si l'id de l'objet numéro i est égal à l'id recherché
@@ -191,12 +191,31 @@ function displayTotalCost(totalCost){
 //     })
 // }
 
-function clickDelete(i){
+function clickDelete(i, productId, productLense){
     document.querySelector('#delete-product'+i).addEventListener('click', () => {
-    console.log('"button' + i + 'clické"')
-        
+    console.log('"button' + i + 'clické"')   
+    deleteProduct(productId, productLense)
     })
 }
+
+
+function deleteProduct(productId, productLense) {
+    // console.log('je veux supprimer larticle ' + productId + ' avec ' + productLense)
+    let cartContentInitial = getCartFromLocal() // on récupere la liste des produits dans la local storage
+    resultSameID = searchSameId(productId, cartContentInitial); // recherche du même id dans le local storage
+    resultSameLense = searchSameLense(productLense, cartContentInitial, resultSameID); // on definie la liste d'exclusion
+    // console.log(resultSameID)
+    // console.log(resultSameLense)
+    let newCartContent = []
+    for(let i = 0; i < cartContentInitial.length; i++) {
+        if (!resultSameLense.includes(i)) { // si le produit n'est pas dans la liste d'exclusion
+            newCartContent.push(cartContentInitial[i])
+        }
+    }
+    localStorage.setItem("storedCartContent", JSON.stringify(newCartContent))
+    location.reload();
+}
+
 
 
 ajax.get('http://localhost:3000/api/cameras').then((products) => {
@@ -216,7 +235,7 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
         displayCartItems(i, sortedProductList[i], products[y],itemTypeCost);
         // console.log(sortedProductList[i].id);
         // console.log(y);
-        clickDelete(i)
+        clickDelete(i, sortedProductList[i].id, sortedProductList[i].lense)
     }
     console.log(totalCost)
     displayTotalCost(totalCost)
