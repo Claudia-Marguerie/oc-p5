@@ -1,20 +1,23 @@
 const ajax = new Ajax()
 // localStorage.clear()
 
+
 function getCartFromLocal() { // récupère les produits du stockage local
-    let cartContentLocal = localStorage.getItem('storedCartContent')
-    if (cartContentLocal == null){
-        cartContentLocal = []
+    let cartContentLocal = localStorage.getItem('storedCartContent') // le contenu du panier dans le stockage local
+    if (cartContentLocal == null){ // Si le panier est vide
+        cartContentLocal = [] // on crée un tableau
     } else {
-        cartContentLocal = JSON.parse(cartContentLocal)
-        console.log(cartContentLocal)
+        cartContentLocal = JSON.parse(cartContentLocal) // on transforme le contenu en un tableau d'objet (pour que soit lisible par JS)
+        // console.log(cartContentLocal)
     }
     return cartContentLocal
 }
 
-function displayCartNumber(cartContent) {
+
+function displayCartNumber(cartContent) { // affichage le numéro d'articles dans le panier
     document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
+
 
 function searchSameId(searchedId, objectList) { // Cherche les poduits avec même ID 
     let searchResult = []
@@ -26,6 +29,7 @@ function searchSameId(searchedId, objectList) { // Cherche les poduits avec mêm
     return searchResult; // le résultat de la function est la liste des numéros de ligne où on trouve l'id
 }
 
+
 function searchSameId2(searchedId, objectList) { // Cherche les poduits sur le  serveur avec même ID 
     let searchResult = 0
     for (let i = 0; i < objectList.length; i++) {
@@ -35,6 +39,7 @@ function searchSameId2(searchedId, objectList) { // Cherche les poduits sur le  
     }
     return searchResult; // le résultat de la function est le numéro de ligne où on trouve l'id
 }
+
 
 function searchSameLense(searchedLense, objectList, candidateItems) { // Cherche les poduits avec la même lentille parmis ceux qui ont la même id
     let searchResult = []
@@ -46,7 +51,8 @@ function searchSameLense(searchedLense, objectList, candidateItems) { // Cherche
     return searchResult; // le résultat de la function est la liste des numéros de ligne où on trouve le même id et la même lentille
 }
 
-class ProductItem {
+
+class ProductItem { // tableau avec le contenu d'un article dans le panier
     constructor (id, quantity, lense, price) {
         this.id = id;
         this.quantity = quantity;
@@ -54,6 +60,7 @@ class ProductItem {
         this.price = price;
     }
 }
+
 
 function idCompare(a, b) { // Définition du critère de tri suivant l'id
     const idA = a.id;
@@ -108,25 +115,34 @@ function listProducts(products, cartItems) {
     // console.log(consolidatedList);
 }
 
-function displayCartItems(consolidatedListItem, itemServerInformation) {
-    const listProduct = document.querySelector('#product-display-zone');
-    const productListItem = document.createElement('div');
-    let lenseText = consolidatedListItem.lense; // 
-    if (lenseText == "") {
-        lenseText = "-"
+
+function displayCartItems(consolidatedListItem, itemServerInformation, itemTypeCost) { // Affichage de chaque produit selectioné dans le panier dans le DOM
+    const listProduct = document.querySelector('#product-display-zone'); // on défine l'endroit où il va afecter le HTML
+    const productListItem = document.createElement('div'); // on démande de créer une balise <div>
+    
+    let lenseText = consolidatedListItem.lense; // variable pour les options des lentilles
+    if (lenseText == "") { // s'il n'y a pas d'option selecctionée
+        lenseText = "-" // on ajoute un tiret
     }
-    console.log(lenseText)
-    productListItem.innerHTML = 
+    // console.log(lenseText)
+
+    // let pricePerItemType = itemServerInformation.price;
+    // let quantity = consolidatedListItem.quantity;
+    // if (quantity > 1) {
+    //     pricePerItemType = itemServerInformation.price * quantity;
+    // }
+
+    productListItem.innerHTML =  // on crée la partie ci-dessous en HTML
                 '<div id="panier-items">'+                
                     '<div class="panier-product">'+
-                        '<img class="product-image" src="' + itemServerInformation.imageUrl + '" alt="">'+
+                        '<img class="product-image" src="' + itemServerInformation.imageUrl + '" alt="">'+ // on récupère l'imgae du serveur
                     '</div>'+
                     '<div class="panier-product">'+
                         '<div class="product-info">'+
                             '<h3>PRODUIT</h3>'+
                         '</div>'+
                         '<div class="product-info">'+
-                            '<p class="product-name">' + itemServerInformation.name + '</p>'+
+                            '<p class="product-name">' + itemServerInformation.name + '</p>'+ // on récupère le nom du produit du serveur
                         '</div>'+
                     '</div>'+
                     '<div class="panier-product">'+
@@ -134,7 +150,7 @@ function displayCartItems(consolidatedListItem, itemServerInformation) {
                             '<h3>QTE</h3>'+
                         '</div>'+
                         '<div class="product-info">'+
-                            '<p class="product-quantity">' + consolidatedListItem.quantity + '</p>'+
+                            '<p class="product-quantity">' + consolidatedListItem.quantity + '</p>'+ // on récupère la quantité dans la liste consolidée
                         '</div>'+
                     '</div>'+
                     '<div class="panier-product">'+
@@ -142,7 +158,7 @@ function displayCartItems(consolidatedListItem, itemServerInformation) {
                             '<h3>LENTILLE</h3>'+
                         '</div>'+
                         '<div class="product-info">'+
-                            '<p class="product-quantity">' + lenseText + '</p>'+
+                            '<p class="product-quantity">' + lenseText + '</p>'+ // on utilise la variable lenseText
                         '</div>'+
                     '</div>'+
                     '<div class="panier-product">'+
@@ -150,16 +166,31 @@ function displayCartItems(consolidatedListItem, itemServerInformation) {
                             '<h3>PRIX</h3>'+
                         '</div>'+
                         '<div class="product-info">'+
-                            '<p class="product-price">' + itemServerInformation.price + '</p>'+
+                            '<p class="product-price">' + itemTypeCost + ' €</p>'+ // on utilise la variable pricePerItem
                         '</div>'+
                     '</div>'+
                     '<div class="btn-remove">'+
-                        '<button><img src="images/trash.png" alt="Picto supprimer"></button>'+
+                        '<button id="delete-product"><img src="images/trash.png" alt="Picto supprimer"></button>'+
                     '</div>'+
                 '</div>'
     listProduct.appendChild(productListItem);
 }
 
+
+function displayTotalCost(totalCost){
+    document.querySelector('.total-cost').textContent = totalCost + ' €'
+    document.querySelector('.panier-total--cost').textContent = totalCost + ' €'
+}
+
+
+function deleteProduct(consolidatedList, storedCartContent, displayCartItems){
+    
+}
+
+// le placer après dans le display product
+// document.querySelector('#delete-product').addEventListener('click', () => {
+//     deleteProduct()
+// })
 
 
 ajax.get('http://localhost:3000/api/cameras').then((products) => {
@@ -167,14 +198,22 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
     displayCartNumber(cartContent);
     let sortedProductList = listProducts(products, cartContent);
     console.log(products)
+    
+    let totalCost = 0;
+    
     for(let i = 0; i < sortedProductList.length; i++){
         let y = searchSameId2(sortedProductList[i].id, products);
+        let itemTypeCost = sortedProductList[i].quantity * products[y].price;
+        totalCost = totalCost + itemTypeCost;
         // console.log(products[y])
-        // console.log(sortedProductList[i])
-        displayCartItems(sortedProductList[i], products[y]);
+        // console.log(sortedProductList[i]
+        displayCartItems(sortedProductList[i], products[y],itemTypeCost);
         // console.log(sortedProductList[i].id);
         // console.log(y);
     }
+    console.log(totalCost)
+    displayTotalCost(totalCost)
+    
 }, (err) => {
     console.log(err)
 })
