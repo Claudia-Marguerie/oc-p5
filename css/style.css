@@ -627,6 +627,14 @@ button:hover {
   }
 }
 
+#empty-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #85c6c8;
+}
+
 @font-face {
   font-family: "sinkin_sans300_light";
   src: url("../fonts/SinkinSans-300Light-webfont.eot");

@@ -82,35 +82,37 @@ function listProducts(products, cartItems) {
     let resultSameLense = [];
     console.log(cartItems);
 
-    let newItem = new ProductItem; // création d'un objet vide 
-    console.log(newItem);
+    if (cartItems.length > 0){
+        let newItem = new ProductItem; // création d'un objet vide 
+        console.log(newItem);
 
-    newItem.id = cartItems[0].id; // recopie les informations depuis le premier produit du panier vers newItem
-    newItem.quantity = 1;
-    newItem.lense = cartItems[0].lense;
+        newItem.id = cartItems[0].id; // recopie les informations depuis le premier produit du panier vers newItem
+        newItem.quantity = 1;
+        newItem.lense = cartItems[0].lense;
 
-    consolidatedList.push(newItem); // ajout de newItem à la liste qui sera à retourner
-    console.log(consolidatedList);
+        consolidatedList.push(newItem); // ajout de newItem à la liste qui sera à retourner
+        console.log(consolidatedList);
 
-    for (let i = 1; i < cartItems.length; i++) { // boucle pour tous les produits contenus dans le panier
-        let currentId = cartItems[i].id; // on recupére l'id du produit numéro i dans le panier
-        console.log(currentId);
+        for (let i = 1; i < cartItems.length; i++) { // boucle pour tous les produits contenus dans le panier
+            let currentId = cartItems[i].id; // on recupére l'id du produit numéro i dans le panier
+            console.log(currentId);
 
-        resultSameID = searchSameId(currentId, consolidatedList); // recherche du même id dans la liste consolidée
-        resultSameLense = searchSameLense(cartItems[i].lense, consolidatedList, resultSameID);
+            resultSameID = searchSameId(currentId, consolidatedList); // recherche du même id dans la liste consolidée
+            resultSameLense = searchSameLense(cartItems[i].lense, consolidatedList, resultSameID);
 
-        if (resultSameID.length > 0 && resultSameLense.length > 0 ) { // si l'id existe déjà dans la liste consolidée et si la lentille existe dejà dans la liste consolidée
-            consolidatedList[resultSameLense[0]].quantity++; // il incremente la quantité de lentilles
-        } else {
-            let newItem2 = new ProductItem; // création d'un objet vide 
-            newItem2.id = currentId; // recopie les informations depuis le produit i du panier vers newItem
-            newItem2.quantity = 1; 
-            newItem2.lense = cartItems[i].lense;
-            // console.log(newItem2);
-            consolidatedList.push(newItem2); // ajout de newItem à la liste qui sera à retourner
+            if (resultSameID.length > 0 && resultSameLense.length > 0 ) { // si l'id existe déjà dans la liste consolidée et si la lentille existe dejà dans la liste consolidée
+                consolidatedList[resultSameLense[0]].quantity++; // il incremente la quantité de lentilles
+            } else {
+                let newItem2 = new ProductItem; // création d'un objet vide 
+                newItem2.id = currentId; // recopie les informations depuis le produit i du panier vers newItem
+                newItem2.quantity = 1; 
+                newItem2.lense = cartItems[i].lense;
+                // console.log(newItem2);
+                consolidatedList.push(newItem2); // ajout de newItem à la liste qui sera à retourner
+                }
         }
+        consolidatedList.sort(idCompare); 
     }
-    consolidatedList.sort(idCompare); 
     return consolidatedList;
     // console.log(consolidatedList);
 }
@@ -124,14 +126,6 @@ function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTy
     if (lenseText == "") { // s'il n'y a pas d'option selecctionée
         lenseText = "-" // on ajoute un tiret
     }
-    // console.log(lenseText)
-
-    // let pricePerItemType = itemServerInformation.price;
-    // let quantity = consolidatedListItem.quantity;
-    // if (quantity > 1) {
-    //     pricePerItemType = itemServerInformation.price * quantity;
-    // }
-
     productListItem.innerHTML =  // on crée la partie ci-dessous en HTML
                 '<div id="panier-items">'+                
                     '<div class="panier-product">'+
@@ -182,40 +176,86 @@ function displayTotalCost(totalCost){
 }
 
 
-// function createRemoveButton(i){
-//     let buttonClass = '#delete-product' + i;
-//     console.log(buttonClass)
-//     document.querySelector(buttonClass).addEventListener('click', () => {
-//     //deleteProduct(i)
-//     console.log(i)
-//     })
-// }
-
-function clickDelete(i, productId, productLense){
+function createDeleteBoutton(i, productId, productLense, products){
     document.querySelector('#delete-product'+i).addEventListener('click', () => {
-    console.log('"button' + i + 'clické"')   
-    deleteProduct(productId, productLense)
+    // console.log('"button' + i + 'clické"')   
+    deleteProduct(productId, productLense, products, false)
     })
 }
 
 
-function deleteProduct(productId, productLense) {
-    // console.log('je veux supprimer larticle ' + productId + ' avec ' + productLense)
-    let cartContentInitial = getCartFromLocal() // on récupere la liste des produits dans la local storage
-    resultSameID = searchSameId(productId, cartContentInitial); // recherche du même id dans le local storage
-    resultSameLense = searchSameLense(productLense, cartContentInitial, resultSameID); // on definie la liste d'exclusion
-    // console.log(resultSameID)
-    // console.log(resultSameLense)
-    let newCartContent = []
-    for(let i = 0; i < cartContentInitial.length; i++) {
-        if (!resultSameLense.includes(i)) { // si le produit n'est pas dans la liste d'exclusion
-            newCartContent.push(cartContentInitial[i])
-        }
-    }
-    localStorage.setItem("storedCartContent", JSON.stringify(newCartContent))
-    location.reload();
+function createDeleteBouttonForAll(){
+    document.querySelector('#delete-all').addEventListener('click', () => { 
+    deleteProduct('', '', [], true)
+    })
 }
 
+
+function deleteProduct(productId, productLense, products, deleteAll) {
+    // console.log('je veux supprimer larticle ' + productId + ' avec ' + productLense)
+    let newCartContent = []
+    let sortedProductList = []
+
+    if (!deleteAll) { // Si la demande n'esta pas de tout effacer, on exécute pas les actions dessous
+        let cartContentInitial = getCartFromLocal() // on récupere la liste des produits dans la local storage
+        resultSameID = searchSameId(productId, cartContentInitial); // recherche du même id dans le local storage
+        resultSameLense = searchSameLense(productLense, cartContentInitial, resultSameID); // on definie la liste d'exclusion
+        // console.log(resultSameID)
+        // console.log(resultSameLense)
+        
+        for(let i = 0; i < cartContentInitial.length; i++) {
+            if (!resultSameLense.includes(i)) { // si le produit n'est pas dans la liste d'exclusion
+                newCartContent.push(cartContentInitial[i])
+            }
+        }
+    }
+    
+    localStorage.setItem("storedCartContent", JSON.stringify(newCartContent))
+    displayCartNumber(newCartContent);
+   
+    sortedProductList = listProducts(products, newCartContent);
+    console.log(sortedProductList)
+
+    const numberOfDiv = document.getElementById("product-display-zone").childElementCount;
+    console.log(numberOfDiv)
+
+    for(let i = 1; i <= numberOfDiv; i++){  // On demande d'effacer la div dans le DOM
+        const productToDelete = document.querySelector('#product-display-zone div');
+        productToDelete.parentNode.removeChild(productToDelete);
+    }
+
+    let totalCost = 0;
+
+    if (sortedProductList.length == 0){
+        displayCartEmpty() 
+    }
+
+    for(let i = 0; i < sortedProductList.length; i++){
+        let y = searchSameId2(sortedProductList[i].id, products);
+        let itemTypeCost = sortedProductList[i].quantity * products[y].price;
+        totalCost = totalCost + itemTypeCost;
+        // console.log(products[y])
+        // console.log(sortedProductList[i]
+
+        displayCartItems(i, sortedProductList[i], products[y], itemTypeCost);
+
+        // console.log(sortedProductList[i].id);
+        // console.log(y);
+        createDeleteBoutton(i, sortedProductList[i].id, sortedProductList[i].lense, products)
+    }
+    displayTotalCost(totalCost)
+
+
+}
+
+
+function displayCartEmpty(){
+    const emptyList = document.querySelector('#product-display-zone');
+    const emptyItem = document.createElement('div');
+    emptyItem.innerHTML = '<h3 id="empty-cart">Panier vide !</h3>';
+    console.log(emptyItem)
+    emptyList.appendChild(emptyItem);
+}
 
 
 ajax.get('http://localhost:3000/api/cameras').then((products) => {
@@ -223,8 +263,13 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
     displayCartNumber(cartContent);
     let sortedProductList = listProducts(products, cartContent);
     console.log(products)
+    console.log(sortedProductList)
     
     let totalCost = 0;
+
+    if (sortedProductList.length == 0){
+        displayCartEmpty() 
+    }
     
     for(let i = 0; i < sortedProductList.length; i++){
         let y = searchSameId2(sortedProductList[i].id, products);
@@ -235,10 +280,11 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
         displayCartItems(i, sortedProductList[i], products[y],itemTypeCost);
         // console.log(sortedProductList[i].id);
         // console.log(y);
-        clickDelete(i, sortedProductList[i].id, sortedProductList[i].lense)
+        createDeleteBoutton(i, sortedProductList[i].id, sortedProductList[i].lense, products)
     }
     console.log(totalCost)
     displayTotalCost(totalCost)
+    createDeleteBouttonForAll()
 }, (err) => {
     console.log(err)
 })
