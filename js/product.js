@@ -36,6 +36,7 @@ function addToCart(product){
     cartContent.push({
         id: product._id, lense: document.querySelector("#option-lentille").value
     })
+    // console.log(cartContent)
     localStorage.setItem("storedCartContent", JSON.stringify(cartContent))
     document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
@@ -50,27 +51,6 @@ function displayCartNumber() {
     document.querySelector('#cart-item-quantity').textContent = cartContent.length
 }
 
-
-
-
-
-// function cartInit(){
-//     sessionStorage.clear();
-//     let storedCartContent = new Number (0);
-//     sessionStorage.setItem('storedCartContent', storedCartContent);
-//  }
-
-
-
-
-// function displayProduct(product){
-//     document.querySelector('#product-name').textContent = product.name
-//     document.querySelector('#product-image').setAttribute('src', product.imageUrl)
-//     document.querySelector('#product-price').textContent = product.price + '€'
-//     document.querySelector('#add-cart').addEventListener('click', () => {
-//         addToCart(product)
-//     })
-// }
 
 ajax.get('http://localhost:3000/api/cameras/' + productId).then((product) => {
     displayProduct(product)

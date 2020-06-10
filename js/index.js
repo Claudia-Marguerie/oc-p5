@@ -12,7 +12,7 @@ function displayProduct(product){
 function displayTextEnd(){
     const listProduct = document.querySelector('#list-products');
     const textBoxEnd = document.createElement('div');
-    textBoxEnd.innerHTML = '<div class="text-end"><p>Nos meilleurs sélections sont présentées ici chaque semaine !</p></div>'
+    textBoxEnd.innerHTML = '<div class="text-end"><p>Nos meilleures sélections sont présentées ici chaque semaine !</p></div>'
     listProduct.appendChild(textBoxEnd);
 }
 

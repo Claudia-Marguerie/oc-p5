@@ -128,49 +128,8 @@
                                 <button id="delete-product"><img src="images/trash.png" alt="Picto supprimer"></button>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div id="panier-items">
-                            <div class="panier-product">
-                                <img class="product-image" src="images/vcam_2.jpg" alt="">
-                            </div>
-                            <div class="panier-product">
-                                <div class="product-info">
-                                    <h3>PRODUIT</h3>
-                                </div>
-                                <div class="product-info">
-                                    <p class="product-name">Caméra 2</p>
-                                </div>
-                            </div>
-                            <div class="panier-product">
-                                <div class="product-info">
-                                    <h3>QTE</h3>
-                                </div>
-                                <div class="product-info">
-                                    <p class="product-quantity">1</p>
-                                </div>
-                            </div>
-                            <div class="panier-product">
-                                <div class="product-info">
-                                    <h3>LENTILLE</h3>
-                                </div>
-                                <div class="product-info">
-                                    <p class="product-quantity">xxxxxxxxxxxxxxxxx</p>
-                                </div>
-                            </div>
-                            <div class="panier-product">
-                                <div class="product-info">
-                                    <h3>PRIX</h3>
-                                </div>
-                                <div class="product-info">
-                                    <p class="product-price">xxxxx</p>
-                                </div>
-                            </div>
-                            <div class="btn-remove">
-                                <button><img src="images/trash.png" alt="Picto supprimer"></button>
-                            </div>
-                        </div>
                     </div> -->
+                   
                 </div>
                 <div class="remove-all">
                     <button id="delete-all">Vider le panier</button>
@@ -197,11 +156,13 @@
                     <form>
                         <div class="formulaire-item">
                             <label for="first-name">Prénom :</label> 
-                            <input type="text" id="first-name" name="first-name" required> 
+                            <input type="text" id="first-name" name="first-name" required>
+                            <span id="missFirstName"></span> 
                         </div>
                         <div class="formulaire-item">
                             <label for="last-name">Nom :</label>
                             <input type="text" id="last-name" name="last-name" required>
+                            <span id="missLastName"></span> 
                         </div>
                         <div class="formulaire-item">
                             <label for="adresse">Adresse :</label>
@@ -213,10 +174,10 @@
                         </div>
                         <div class="formulaire-item">
                             <label for="email">E-mail :</label>
-                            <input type="text" id="email" name="email" required>
+                            <input type="email" id="email" name="email" pattern="[0-9]{,3}" required>
                         </div>
                     </form>
-                    <a href="command.html"><button id="validation-cart">Valider</button></a>
+                    <a href="command.html"><button id="validation-cart" type="submit">Valider</button></a>
                 </div>
             </div>
         </div>
