@@ -287,44 +287,84 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
 })
 
 
-let formValid = document.getElementById('validation-cart');
-let firstName = document.getElementById('first-name');
-let lastName = document.getElementById('last-name');
-let missFirstName = document.getElementById('missFirstName');
-let missLastName = document.getElementById('missLastName');
-let firstNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
-let lastNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
 
-formValid.addEventListener('click', validation);
+
+function formValid() { 
+    document.getElementById('validation-cart').addEventListener('click', validation);
+}
+
+formValid()
+
+// let formValid = document.getElementById('validation-cart');
+// formValid.addEventListener('click', validation);
+
 
 function validation(event) {
-    if (firstName.validity.valueMissing) { // Si le champ est vide
+    let firstName = document.getElementById('first-name');
+    let lastName = document.getElementById('last-name');
+    let address = document.getElementById('adresse');
+    let city = document.getElementById('ville');
+    let email = document.getElementById('email');
+
+    let missFirstName = document.getElementById('missFirstName');
+    let missLastName = document.getElementById('missLastName');
+    let missAddress = document.getElementById('missAddress');
+    let missCity = document.getElementById('missCity');
+    let missEmail = document.getElementById('missEmail');
+
+    let firstNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let lastNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let addressValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let cityValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let emailValid = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+
+    if (firstName.validity.valueMissing) { // Si le champ 'prénom' est vide
         event.preventDefault();
-        missFirstName.textContent = "Prénom manquant";
-        missFirstName.style.color = 'red';
-        missFirstName.style.fontWeight = 'bolder';
-        missFirstName.style.margin = 'auto';
+        missFirstName.textContent = "Ce champ est obligatoire : prénom manquant";
     } else if (firstNameValid.test(firstName.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missFirstName.textContent = 'Format incorrect';
-        missFirstName.style.color = 'red';
-        missFirstName.style.fontWeight = 'bolder';
-        missFirstName.style.margin = 'auto';
     } else {
+        missFirstName.textContent = '';
     }
 
-    if (lastName.validity.valueMissing) { // Si le champ est vide
+    if (lastName.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
-        missLastName.textContent = 'Nom manquant';
-        missLastName.style.color = 'red';
-        missLastName.style.fontWeight = 'bolder';
-        missLastName.style.margin = 'auto';
+        missLastName.textContent = 'Ce champ est obligatoire : nom manquant';
     } else if (lastNameValid.test(lastName.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missLastName.textContent = 'Format incorrect';
-        missLastName.style.color = 'red';
-        missLastName.style.fontWeight = 'bolder';
-        missLastName.style.margin = 'auto';
     } else {
+        missLastName.textContent = '';
+    }
+
+    if (address.validity.valueMissing) { // Si le champ 'nom' est vide
+        event.preventDefault();
+        missAddress.textContent = 'Ce champ est obligatoire : adresse manquante';
+    } else if (addressValid.test(address.value) == false) { // Si le format est incorrect
+        event.preventDefault();
+        missAddress.textContent = 'Format incorrect';
+    } else {
+        missAddress.textContent = '';
+    }
+
+    if (city.validity.valueMissing) { // Si le champ 'nom' est vide
+        event.preventDefault();
+        missCity.textContent = 'Ce champ est obligatoire : ville manquante';
+    } else if (cityValid.test(city.value) == false) { // Si le format est incorrect
+        event.preventDefault();
+        missCity.textContent = 'Format incorrect';
+    } else {
+        missCity.textContent = '';
+    }
+
+    if (email.validity.valueMissing) { // Si le champ 'e-mail' est vide
+        event.preventDefault();
+        missEmail.textContent = 'Ce champ est obligatoire : e-mail manquant';
+    } else if (emailValid.test(email.value) == false) { // Si le format est incorrect
+        event.preventDefault();
+        missEmail.textContent = 'Format incorrect';
+    } else {
+        missEmail.textContent = '';
     }
 }

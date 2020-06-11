@@ -548,6 +548,11 @@ button:hover {
   padding-left: 10px;
   font-size: 1em;
 }
+#formulaire form span {
+  color: red;
+  font-weight: bolder;
+  margin: auto;
+}
 #formulaire a {
   width: 50%;
 }
