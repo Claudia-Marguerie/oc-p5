@@ -281,7 +281,7 @@ ajax.get('http://localhost:3000/api/cameras').then((products) => {
     console.log(totalCost)
     displayTotalCost(totalCost)
     createDeleteBouttonForAll()
-
+    formValid();
 }, (err) => {
     console.log(err)
 })
@@ -303,21 +303,36 @@ function separateThousands(nb) { // Function pour séparer les milliers des chif
 
 
 function formValid() { 
-    document.getElementById('validation-cart').addEventListener('click', validation);
+    document.getElementById('form').addEventListener('submit', checkAndSubmitData);
+
 }
 
-formValid()
 
-// let formValid = document.getElementById('validation-cart');
-// formValid.addEventListener('click', validation);
+function checkAndSubmitData(event){
+    let event2 = event;
+    let formOK = formCheck(event2);
+    // console.log("on est dans la fonction checkAndSubmitData()");
+    // console.log(sortedProductList);
+    if (formOK){ // Si le formulaire à un bon format et si le panier n'est pas vide (rajouter)
+        // on cree le tableau de contact
+        // on cree le tableau panier
+        // on envoie les donnees au serveur
+        // on attend la confirmation
+        // Suite a la confirmation du serveur, on envoie vers la page command.html
+    }
 
+}
 
-function validation(event) {
-    let firstName = document.getElementById('first-name');
-    let lastName = document.getElementById('last-name');
-    let address = document.getElementById('adresse');
-    let city = document.getElementById('ville');
-    let email = document.getElementById('email');
+function formCheck(event) {
+    event.preventDefault()
+    console.log('hello, event en dessous')
+    console.log(event)
+    let formOK = true;
+    let firstName = event.target.firstname;
+    let lastName = event.target.lastname;
+    let address = event.target.address;
+    let city = event.target.city;
+    let email = event.target.email;
 
     let missFirstName = document.getElementById('missFirstName');
     let missLastName = document.getElementById('missLastName');
@@ -327,16 +342,18 @@ function validation(event) {
 
     let firstNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let lastNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
-    let addressValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let addressValid = /^[0-9]+\s[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let cityValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let emailValid = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 
     if (firstName.validity.valueMissing) { // Si le champ 'prénom' est vide
         event.preventDefault();
         missFirstName.textContent = "Ce champ est obligatoire : prénom manquant";
+        formOK = false;
     } else if (firstNameValid.test(firstName.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missFirstName.textContent = 'Format incorrect';
+        formOK = false;
     } else {
         missFirstName.textContent = '';
     }
@@ -344,9 +361,11 @@ function validation(event) {
     if (lastName.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
         missLastName.textContent = 'Ce champ est obligatoire : nom manquant';
+        formOK = false;
     } else if (lastNameValid.test(lastName.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missLastName.textContent = 'Format incorrect';
+        formOK = false;
     } else {
         missLastName.textContent = '';
     }
@@ -354,9 +373,11 @@ function validation(event) {
     if (address.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
         missAddress.textContent = 'Ce champ est obligatoire : adresse manquante';
+        formOK = false;
     } else if (addressValid.test(address.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missAddress.textContent = 'Format incorrect';
+        formOK = false;
     } else {
         missAddress.textContent = '';
     }
@@ -364,9 +385,11 @@ function validation(event) {
     if (city.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
         missCity.textContent = 'Ce champ est obligatoire : ville manquante';
+        formOK = false;
     } else if (cityValid.test(city.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missCity.textContent = 'Format incorrect';
+        formOK = false;
     } else {
         missCity.textContent = '';
     }
@@ -374,10 +397,45 @@ function validation(event) {
     if (email.validity.valueMissing) { // Si le champ 'e-mail' est vide
         event.preventDefault();
         missEmail.textContent = 'Ce champ est obligatoire : e-mail manquant';
+        formOK = false;
     } else if (emailValid.test(email.value) == false) { // Si le format est incorrect
         event.preventDefault();
         missEmail.textContent = 'Format incorrect';
+        formOK = false;
     } else {
         missEmail.textContent = '';
     }
+    console.log("test du formulaire par le JS est OK? " + formOK)
+    return formOK;
 }
+
+
+
+
+
+
+
+function confirmOrder(){
+    document.location = 'command.html';
+    console.log(document.location)
+    
+}
+
+
+class Contact {
+    constructor(firstname, lastname, address, city, email){
+        this.firstname = "";
+        this.lastname = "";
+        this.address = "";
+        this.city = "";
+        this.email = "";
+    }
+}
+
+// let contact = new Contact(firstname, lastname, address, city, email)
+
+
+// let request = new XMLHttpRequest();
+// request.open("POST", "http://localhost:3000/api/cameras");
+// request.setRequestHeader("Content-Type", "application/json");
+// request.send(JSON.stringify(jsonBody));
