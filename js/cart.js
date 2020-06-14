@@ -1,20 +1,26 @@
+//------------------------------------ Definition des variables globales -----------------------
 const ajax = new Ajax()
+let localStorageCartContent = [];
+let consolidatedList = [];
+let totalCost = 0;
+let serverProductList = [];
 
+//------------------------------------ Definition des fonctions -----------------------
 
 function getCartFromLocal() { // récupère les produits du stockage local
-    let cartContentLocal = localStorage.getItem('storedCartContent') // on crée une variable pour le contenu du panier dans le stockage local
-    if (cartContentLocal == null){ // Si le panier est vide
-        cartContentLocal = [] // on crée un tableau
+    localStorageCartContent = localStorage.getItem('storedCartContent') // on crée une variable pour le contenu du panier dans le stockage local
+    if (localStorageCartContent == null){ // Si le panier est vide
+        localStorageCartContent = [] // on crée un tableau
     } else {
-        cartContentLocal = JSON.parse(cartContentLocal) // on transforme le contenu en un tableau d'objet (pour que soit lisible par JS)
-        console.log(cartContentLocal)
+        localStorageCartContent = JSON.parse(localStorageCartContent) // on transforme le contenu en un tableau d'objet (pour que soit lisible par JS)
+        console.log(localStorageCartContent)
     }
-    return cartContentLocal
+   // return cartContentLocal
 }
 
 
-function displayCartNumber(cartContent) { // function pour afficher le numéro d'articles dans le panier
-    document.querySelector('#cart-item-quantity').textContent = cartContent.length // l'emplacement où il sera affiché
+function displayCartNumber() { // function pour afficher le numéro d'articles dans le panier
+    document.querySelector('#cart-item-quantity').textContent = localStorageCartContent.length // l'emplacement où il sera affiché
 }
 
 
@@ -75,29 +81,29 @@ function idCompare(a, b) { // Définition du critère de tri suivant l'id
 }
   
 
-function listProducts(products, cartItems) {
-    let consolidatedList = []; // création de la liste à retourner avec les produits groupés par le même id et même lentille
+function consolidateCartList() {
+    consolidatedList = []; // création de la liste à retourner avec les produits groupés par le même id et même lentille
     let resultSameID = []; // création de la liste de numéro de ligne dans le tableau d'objet
     let resultSameLense = []; // création de la liste de numéro de ligne dans le tableau d'objet des produits selon la lentille
-    console.log(cartItems);
+    console.log(localStorageCartContent);
 
-    if (cartItems.length > 0){
+    if (localStorageCartContent.length > 0){
         let newItem = new ProductItem; // création d'un objet vide 
         console.log(newItem);
 
-        newItem.id = cartItems[0].id; // recopie les informations depuis le produit i du panier vers newItem
+        newItem.id = localStorageCartContent[0].id; // recopie les informations depuis le produit i du panier vers newItem
         newItem.quantity = 1; // on donne 1 comme quantité
-        newItem.lense = cartItems[0].lense; // recopie les informations depuis le produit i du panier vers newItem
+        newItem.lense = localStorageCartContent[0].lense; // recopie les informations depuis le produit i du panier vers newItem
 
         consolidatedList.push(newItem); // ajout de newItem à la liste qui sera à retourner
         console.log(consolidatedList);
 
-        for (let i = 1; i < cartItems.length; i++) { // boucle pour tous les produits contenus dans le panier
-            let currentId = cartItems[i].id; // on recupére l'id du produit numéro i dans le panier
+        for (let i = 1; i < localStorageCartContent.length; i++) { // boucle pour tous les produits contenus dans le panier
+            let currentId = localStorageCartContent[i].id; // on recupére l'id du produit numéro i dans le panier
             console.log(currentId);
 
             resultSameID = searchSameId(currentId, consolidatedList); // recherche du même id dans la liste consolidée
-            resultSameLense = searchSameLense(cartItems[i].lense, consolidatedList, resultSameID); // recherche la même lentille dans la liste consolidée
+            resultSameLense = searchSameLense(localStorageCartContent[i].lense, consolidatedList, resultSameID); // recherche la même lentille dans la liste consolidée
 
             if (resultSameID.length > 0 && resultSameLense.length > 0 ) { // si l'id existe déjà dans la liste consolidée et si la lentille existe dejà dans la liste consolidée
                 consolidatedList[resultSameLense[0]].quantity++; // il incremente la quantité de lentilles
@@ -105,20 +111,20 @@ function listProducts(products, cartItems) {
                 let newItem2 = new ProductItem; // création d'un objet vide 
                 newItem2.id = currentId; // recopie les informations depuis le produit i du panier vers newItem
                 newItem2.quantity = 1; // on donne 1 comme quantité
-                newItem2.lense = cartItems[i].lense; // recopie les informations depuis le produit i du panier vers newItem
+                newItem2.lense = localStorageCartContent[i].lense; // recopie les informations depuis le produit i du panier vers newItem
                 // console.log(newItem2);
                 consolidatedList.push(newItem2); // ajout de newItem à la liste qui sera à retourner
                 }
         }
         consolidatedList.sort(idCompare); 
     }
-    return consolidatedList; // on obtient la liste consolidée avec les produits triés par ID et lentilles
+    // return consolidatedList; // on obtient la liste consolidée avec les produits triés par ID et lentilles
     // console.log(consolidatedList);
 }
 
 
 function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTypeCost) { // Affichage de chaque produit selectioné dans le panier dans le DOM
-    const listProduct = document.querySelector('#product-display-zone'); // on défine l'endroit où il va afecter le HTML
+    const listProductHtml = document.querySelector('#product-display-zone'); // on défine l'endroit où il va afecter le HTML
     const productListItem = document.createElement('div'); // on démande de créer une balise <div>
     let lenseText = consolidatedListItem.lense; // variable pour les options des lentilles
     if (lenseText == "") { // s'il n'y a pas d'option selecctionée
@@ -165,54 +171,60 @@ function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTy
                         '<button id="delete-product' + i +'"><img src="images/trash.png" alt="Picto supprimer"></button>'+
                     '</div>'+
                 '</div>'
-    listProduct.appendChild(productListItem); // ça applique aux childs de la liste dans le panier
+    listProductHtml.appendChild(productListItem); // ça applique aux childs de la liste dans le panier
 }
 
-function displayTotalCost (totalCost) { // Afficher le coût total
+function displayTotalCost () { // Afficher le coût total
     document.querySelector('.total-cost').textContent = separateThousands(totalCost) + ' €' // l'émplacement à afficher le prix total
     document.querySelector('.panier-total--cost').textContent = separateThousands(totalCost) + ' €' // l'émplacement à afficher le prix total
 }
 
 
-function createDeleteBoutton (i, productId, productLense, products) { 
+function createDeleteBoutton (i, productId, productLense) { 
     document.querySelector('#delete-product'+i).addEventListener('click', () => {
     // console.log('"button' + i + 'clické"')   
-    deleteProduct(productId, productLense, products, false) // on active la function deleteProduct
+    deleteProduct(productId, productLense, false) // on active la function deleteProduct
     })
 }
 
 
 function createDeleteBouttonForAll () {
     document.querySelector('#delete-all').addEventListener('click', () => { 
-    deleteProduct('', '', [], true) // on active la function deleteProduct
+    deleteProduct('', '', true) // on active la function deleteProduct
     })
 }
 
 
-function deleteProduct(productId, productLense, products, deleteAll) { // function pour effacer un produit de la liste
+function deleteProduct(productId, productLense, deleteAll) { // function pour effacer un produit de la liste
     // console.log('je veux supprimer larticle ' + productId + ' avec ' + productLense)
     let newCartContent = [] // on crée une nouvelle liste
-    let sortedProductList = [] // on crée une nouvelle liste
+    // let sortedProductList = [] // on crée une nouvelle liste
 
     if (!deleteAll) { // Si la demande n'est pas de tout effacer, on exécute pas les actions dessous
-        let cartContentInitial = getCartFromLocal() // on récupere la liste des produits dans la local storage
-        resultSameID = searchSameId(productId, cartContentInitial); // recherche du même id dans le local storage
-        resultSameLense = searchSameLense(productLense, cartContentInitial, resultSameID); // on definie la liste d'exclusion
+        // let cartContentInitial = getCartFromLocal() // on récupere la liste des produits dans la local storage
+        resultSameID = searchSameId(productId, localStorageCartContent); // recherche du même id dans le local storage
+        resultSameLense = searchSameLense(productLense, localStorageCartContent, resultSameID); // on definie la liste d'exclusion
         // console.log(resultSameID)
         // console.log(resultSameLense)
         
-        for(let i = 0; i < cartContentInitial.length; i++) {
+        for(let i = 0; i < localStorageCartContent.length; i++) {
             if (!resultSameLense.includes(i)) { // si le produit n'est pas dans la liste d'exclusion
-                newCartContent.push(cartContentInitial[i]) 
+                newCartContent.push(localStorageCartContent[i]) 
             }
         }
     }
-    
-    localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript
-    displayCartNumber(newCartContent); // on affiche le numéro dans la panier
-   
-    sortedProductList = listProducts(products, newCartContent); // nouvelle liste sans le produit effacé
-    console.log(sortedProductList)
+
+    localStorageCartContent = newCartContent;    
+    localStorage.setItem("storedCartContent", JSON.stringify(localStorageCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript
+
+    displayCartNumber(); // on affiche le numéro dans la panier
+
+    console.log('avant consolidateCartList()');
+    console.log(consolidatedList.length);
+    consolidateCartList(); // nouvelle liste sans le produit effacé
+    console.log('apres consolidateCartList()');
+    console.log(consolidatedList.length);
+
 
     const numberOfDiv = document.getElementById("product-display-zone").childElementCount; // indique le numéro de la division à effacer
     console.log(numberOfDiv)
@@ -222,26 +234,26 @@ function deleteProduct(productId, productLense, products, deleteAll) { // functi
         productToDelete.parentNode.removeChild(productToDelete);
     }
 
-    let totalCost = 0; // le prix commence à O EUROS
+   totalCost = 0; // le prix commence à O EUROS
 
-    if (sortedProductList.length == 0) { // S'il n'y a pas de produit dans le panier (sortedProductList), on active la function displayCartEmpty 
+    if (consolidatedList.length == 0) { // S'il n'y a pas de produit dans le panier (consolidatedList), on active la function displayCartEmpty 
         displayCartEmpty() 
     }
 
-    for(let i = 0; i < sortedProductList.length; i++){ 
-        let y = searchSameId2(sortedProductList[i].id, products); // on cherche la liste des produits avec le même id
-        let itemTypeCost = sortedProductList[i].quantity * products[y].price; // on calcule le prix en function à la quantité
+    for(let i = 0; i < consolidatedList.length; i++){ 
+        let y = searchSameId2(consolidatedList[i].id, serverProductList); // on cherche la liste des produits avec le même id
+        let itemTypeCost = consolidatedList[i].quantity * serverProductList[y].price; // on calcule le prix en function à la quantité
         totalCost = totalCost + itemTypeCost; // on calcule le total avec la somme du total de chaque item
-        // console.log(products[y])
-        // console.log(sortedProductList[i]
+        // console.log(serverProductList[y])
+        // console.log(consolidatedList[i]
 
-        displayCartItems(i, sortedProductList[i], products[y], itemTypeCost); // on re affiche le produit i de la liste restant dans le panier
+        displayCartItems(i, consolidatedList[i], serverProductList[y], itemTypeCost); // on re affiche le produit i de la liste restant dans le panier
 
-        // console.log(sortedProductList[i].id);
+        // console.log(consolidatedList[i].id);
         // console.log(y);
-        createDeleteBoutton(i, sortedProductList[i].id, sortedProductList[i].lense, products) // on active la function correspondant au button supprimer du produit i
+        createDeleteBoutton(i, consolidatedList[i].id, consolidatedList[i].lense) // on active la function correspondant au button supprimer du produit i
     }
-    displayTotalCost(totalCost) // on affiche le prix total actualisé
+    displayTotalCost() // on affiche le prix total actualisé
 }
 
 
@@ -254,32 +266,42 @@ function displayCartEmpty () { // function à activer quand le panier est vide
 }
 
 
-ajax.get('http://localhost:3000/api/cameras').then((products) => {
-    let cartContent = getCartFromLocal(); // on crée un variable pour la function getCartFromLocal
-    displayCartNumber(cartContent); // on appelle la function
-    let sortedProductList = listProducts(products, cartContent); // on crée la variable avec la function listProducts
-    console.log(products)
-    console.log(sortedProductList)
-    
-    let totalCost = 0; //le total cost est égal à O
 
-    if (sortedProductList.length == 0) { // si le panier est égal à 0, on déclanche la function displayCartEmpty
+
+//------------------------------------ Execution -----------------------
+// let localStorageCartContent = [];
+// let consolidatedList = [];
+// let totalCost = 0;
+// let serverProductList = [];
+
+
+ajax.get('http://localhost:3000/api/cameras').then((products) => {
+    serverProductList = products;
+    getCartFromLocal(); // on transfère les informations du panier stocké en local vers la variable globale localStorageCartContent
+    displayCartNumber(); // on appelle la function
+    consolidateCartList(serverProductList); // on crée la variable avec la function consolidateCartList
+    console.log(serverProductList)
+    console.log(consolidatedList)
+    
+    totalCost = 0; //le total cost est égal à O
+
+    if (consolidatedList.length == 0) { // si le panier est égal à 0, on déclanche la function displayCartEmpty
         displayCartEmpty() 
     }
     
-    for(let i = 0; i < sortedProductList.length; i++){
-        let y = searchSameId2(sortedProductList[i].id, products);
-        let itemTypeCost = sortedProductList[i].quantity * products[y].price;
+    for(let i = 0; i < consolidatedList.length; i++){
+        let y = searchSameId2(consolidatedList[i].id, serverProductList);
+        let itemTypeCost = consolidatedList[i].quantity * serverProductList[y].price;
         totalCost = totalCost + itemTypeCost;
-        // console.log(products[y])
-        // console.log(sortedProductList[i]
-        displayCartItems(i, sortedProductList[i], products[y],itemTypeCost);
-        // console.log(sortedProductList[i].id);
+        // console.log(serverProductList[y])
+        // console.log(consolidatedList[i]
+        displayCartItems(i, consolidatedList[i], serverProductList[y],itemTypeCost);
+        // console.log(consolidatedList[i].id);
         // console.log(y);
-        createDeleteBoutton(i, sortedProductList[i].id, sortedProductList[i].lense, products)
+        createDeleteBoutton(i, consolidatedList[i].id, consolidatedList[i].lense, serverProductList)
     }
     console.log(totalCost)
-    displayTotalCost(totalCost)
+    displayTotalCost()
     createDeleteBouttonForAll()
     formValid();
 }, (err) => {
