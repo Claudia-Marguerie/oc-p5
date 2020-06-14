@@ -303,27 +303,30 @@ function separateThousands(nb) { // Function pour séparer les milliers des chif
 
 
 function formValid() { 
+    // let i = 0
     document.getElementById('form').addEventListener('submit', checkAndSubmitData);
-
+    
 }
 
 
 function checkAndSubmitData(event){
-    let event2 = event;
-    let formOK = formCheck(event2);
+    // let event2 = event;
+    let i = 0
+    let formOK = formCheck(event);
     // console.log("on est dans la fonction checkAndSubmitData()");
     // console.log(sortedProductList);
-    if (formOK){ // Si le formulaire à un bon format et si le panier n'est pas vide (rajouter)
+    if (formOK && i == 0){ // Si le formulaire à un bon format et si le panier n'est pas vide (rajouter)
         // on cree le tableau de contact
         // on cree le tableau panier
         // on envoie les donnees au serveur
         // on attend la confirmation
         // Suite a la confirmation du serveur, on envoie vers la page command.html
     }
-
+    console.log('on est arrivée là?')
 }
 
 function formCheck(event) {
+    //let event2 = event;
     event.preventDefault()
     console.log('hello, event en dessous')
     console.log(event)
@@ -342,7 +345,7 @@ function formCheck(event) {
 
     let firstNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let lastNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
-    let addressValid = /^[0-9]+\s[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+    let addressValid = /^[0-9]+\s[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+).{1,30}?$/;
     let cityValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let emailValid = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 
