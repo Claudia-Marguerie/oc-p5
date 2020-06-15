@@ -530,6 +530,11 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 425px) {
+  #formulaire {
+    padding: 20px;
+  }
+}
 #formulaire form {
   width: 100%;
   display: flex;
@@ -558,16 +563,17 @@ button:hover {
   font-weight: bolder;
   margin: auto;
 }
-#formulaire form #validation-cart {
-  width: 30%;
-}
-@media screen and (max-width: 425px) {
-  #formulaire form #validation-cart {
-    width: 70%;
-  }
-}
 #formulaire form button {
   margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+@media screen and (max-width: 425px) {
+  #formulaire form button {
+    width: 80%;
+  }
 }
 
 #panier-total {

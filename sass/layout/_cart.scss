@@ -109,6 +109,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 425px) {
+        padding: 20px;
+    }
     form {
         width: 100%;
         display: flex;
@@ -136,14 +139,21 @@
             font-weight: bolder;
             margin: auto;
         } 
-        #validation-cart {
-            width: 30%;
-            @media screen and (max-width: 425px) {
-                width: 70%;
-            }
-        }
+        // #validation-cart {
+        //     width: 40%;
+        //     @media screen and (max-width: 425px) {
+        //         width: 80%;
+        //     }
+        // }
         button {
             margin: 20px 0 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
+            @media screen and (max-width: 425px) {
+                width: 80%;
+            }
         }  
     }
 }
