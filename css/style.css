@@ -670,7 +670,7 @@ button:hover {
   src: url("../fonts/nova-mono-v10-latin-regular.eot");
   src: local("NovaMono"), url("../fonts/nova-mono-v10-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/nova-mono-v10-latin-regular.woff2") format("woff2"), url("../fonts/nova-mono-v10-latin-regular.woff") format("woff"), url("../fonts/nova-mono-v10-latin-regular.ttf") format("truetype"), url("../fonts/nova-mono-v10-latin-regular.svg#NovaMono") format("svg");
 }
-.command-text {
+#command-text {
   font-family: "sinkin_sans300_light";
   display: flex;
   flex-direction: column;
@@ -678,38 +678,38 @@ button:hover {
   align-items: center;
   margin-top: 30px;
 }
-.command-text h1 {
+#command-text h1 {
   font-size: 7em;
   font-weight: bolder;
   color: #85c6c8;
   font-family: selfie;
   margin: 0;
 }
-.command-text .validation-text {
+#command-text .validation-text {
   border: solid 3px #85c6c8;
   margin-top: -53px;
   padding: 30px;
 }
-.command-text .validation-text h2 {
+#command-text .validation-text h2 {
   text-align: center;
 }
-.command-text .validation-text .data-command {
+#command-text .validation-text .data-command {
   display: flex;
 }
-.command-text .validation-text .data-command p {
+#command-text .validation-text .data-command p {
   margin-right: 10px;
 }
 @media screen and (max-width: 768px) {
-  .command-text .validation-text {
+  #command-text .validation-text {
     margin-bottom: 100px;
   }
 }
-.command-text a {
+#command-text a {
   text-decoration: none;
   color: #85c6c8;
   font-weight: bolder;
 }
-.command-text a:hover {
+#command-text a:hover {
   color: #054448;
   text-shadow: 0 0 3px #85c6c8;
 }

@@ -1,7 +1,7 @@
 @import "../components/fonts";
 @import "../components/variables";
 
-.command-text {
+#command-text {
     font-family: $typhography-primary;
     display: flex;
     flex-direction: column;

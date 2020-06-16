@@ -386,12 +386,14 @@ function formValid() {
 // Outputs:         x
 
 function checkAndSubmitData(event){
-    contact.firstname = event.target.firstname.value; // on cree le tableau de contact
-    contact.lastname = event.target.lastname.value;
+    contact.firstName = event.target.firstname.value; // on cree le tableau de contact
+    contact.lastName = event.target.lastname.value;
     contact.address = event.target.address.value;
     contact.city = event.target.city.value;
     contact.email = event.target.email.value;
     console.log(contact);
+    
+    let serverAnswer = {};
 
     let formOK = formCheck(event);
 
@@ -402,37 +404,36 @@ function checkAndSubmitData(event){
             products.push(id); // on enregistre i (numéro de ligne dans le tableau d'objet) à la suite du tableau du résultat de recherche
         }
         console.log(products);
-        
-        // let request = new XMLHttpRequest();
-        // request.open("POST", "http://localhost:3000/api/cameras");
-        // request.setRequestHeader("Content-Type", "application/form");
-        // request.send(JSON.stringify(contact, product)); 
 
-        // on envoie les donnees au serveur
-        
+       
+
         let orderContentObject = {contact: contact, products: products}
         let orderContent = JSON.stringify(orderContentObject);
         console.log(orderContentObject);
         console.log(orderContent);
-        ajax.post('http://localhost:3000/api/cameras/order',orderContent).then((answer) => {
-            console.log(answer);
+        ajax.post('http://localhost:3000/api/cameras/order',orderContent).then((response) => { // on envoie les donnees au serveur
+           serverAnswer = response;
 
-            // confirmationOrder()
         }, (err) => {
             console.log(err)
         })
+        console.log(serverAnswer);
 
+        let orderIdstring = 'monnumérodecommande';
+        let orderPrice = '60000';
         
+        document.location.assign('command.html?orderId='+ orderIdstring + '&orderPrice='+ orderPrice)
+
+        // document.location.assign('command.html?orderId='+ order._id)
+
         // on attend la confirmation
         // Suite a la confirmation du serveur, on envoie vers la page command.html
     }
     console.log('on est arrivée là?')
+    console.log(serverAnswer);
 }
 
 
-// function confirmationOrder(){
-//     window.location.assign('command.html')
-// }
 
 
 //-----------------------------------------------

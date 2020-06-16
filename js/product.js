@@ -69,6 +69,5 @@ function displayCartNumber() { // function pour afficher le nombre des produits 
 ajax.get('http://localhost:3000/api/cameras/' + productId).then((product) => {
     displayProduct(product)
     displayProductOptions(product)
- //   sessionStorage.clear();
     cartInit()
 })
