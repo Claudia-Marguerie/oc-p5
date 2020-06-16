@@ -280,7 +280,7 @@ function createDeleteBouttonForAll () {
 // Outputs:         x
 
 function deleteProduct(productId, productLense, deleteAll) { 
-    let newCartContent = [] // on crée une nouvelle liste
+    let newCartContent = [] // on crée une nouvelle liste vide
 
     if (!deleteAll) { // Si la demande n'est pas de tout effacer, on exécute pas les actions dessous
         resultSameID = searchSameId(productId, localStorageCartContent); // recherche du même id dans le local storage
@@ -288,7 +288,7 @@ function deleteProduct(productId, productLense, deleteAll) {
         
         for(let i = 0; i < localStorageCartContent.length; i++) {
             if (!resultSameLense.includes(i)) { // si le produit n'est pas dans la liste d'exclusion
-                newCartContent.push(localStorageCartContent[i]) 
+                newCartContent.push(localStorageCartContent[i]) // on ajout le produit à la suite
             }
         }
     }
@@ -312,7 +312,7 @@ function deleteProduct(productId, productLense, deleteAll) {
 // Inputs:          -
 // Outputs:         Message que le panier est vide
 
-function displayCartEmpty () { 
+function displayCartEmpty() { 
     const emptyList = document.querySelector('#product-display-zone'); // on détermine l'endroit à ajouter
     const emptyItem = document.createElement('div'); // on demande de créer une div
     emptyItem.innerHTML = '<h3 id="empty-cart">Panier vide !</h3>'; // l'élement à créer avec le texte à afficher
@@ -419,18 +419,22 @@ function checkAndSubmitData(event){
         })
         console.log(serverAnswer);
 
-        let orderIdstring = 'monnumérodecommande';
+        let orderId = 'monnumérodecommande';
         let orderPrice = '60000';
         
-        document.location.assign('command.html?orderId='+ orderIdstring + '&orderPrice='+ orderPrice)
+        document.location.assign('command.html?orderId='+ orderId+ '&orderPrice='+ orderPrice);
 
-        // document.location.assign('command.html?orderId='+ order._id)
+        let newCartContent = [] // on crée une nouvelle liste vide
+        localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript. On écrasse le panier stocké en local avec le nouv contenu du panier(un produit en moins ou tout effacé)
+
+        
 
         // on attend la confirmation
         // Suite a la confirmation du serveur, on envoie vers la page command.html
     }
     console.log('on est arrivée là?')
     console.log(serverAnswer);
+    
 }
 
 
@@ -527,16 +531,4 @@ function formCheck(event) {
     }
     console.log("test du formulaire par le JS est OK? " + formOK)
     return formOK;
-}
-
-
-
-
-
-
-
-function confirmOrder(){
-    document.location = 'command.html';
-    console.log(document.location)
-    
 }
