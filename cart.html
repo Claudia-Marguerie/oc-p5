@@ -105,31 +105,26 @@
                     </div>
                 </div>
                 <div id="formulaire">
-                    <form id="form">
+                    <form id="form" action="" method="post">
                         <div class="formulaire-item">
-                            <label for="first-name">Prénom :</label> 
-                            <input type="text" name="firstname" required>
-                            <span id="missFirstName"></span> 
+                            <label for="first-name">Prénom *</label> 
+                            <input type="text" id="first-name" name="firstname" placeholder="Prénom" pattern="^\D*$" required>
                         </div>
                         <div class="formulaire-item">
-                            <label for="last-name">Nom :</label>
-                            <input type="text" name="lastname" required>
-                            <span id="missLastName"></span> 
+                            <label for="last-name">Nom *</label>
+                            <input type="text" id="last-name" name="lastname" placeholder="Nom" pattern="^\D*$" required>
                         </div>
                         <div class="formulaire-item">
-                            <label for="adresse">Adresse :</label>
-                            <input type="text" name="address" required>
-                            <span id="missAddress"></span>
+                            <label for="adresse">Adresse *</label>
+                            <input type="text" id="adresse" name="address" placeholder="Adresse" required>
                         </div>
                         <div class="formulaire-item">
-                            <label for="ville">Ville :</label>
-                            <input type="text" name="city" required>
-                            <span id="missCity"></span>
+                            <label for="ville">Ville *</label>
+                            <input type="text" id="ville" name="city" placeholder="Ville" pattern="^\D*$" required>
                         </div>
                         <div class="formulaire-item">
-                            <label for="email">E-mail :</label>
-                            <input type="email" name="email" required>
-                            <span id="missEmail"></span> 
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" placeholder="E-mail" required>
                         </div>
                         <button id="validation-cart" type="submit" onclick=disabled>Valider</button>
                     </form>

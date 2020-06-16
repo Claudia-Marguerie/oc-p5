@@ -21,9 +21,6 @@ class Ajax {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     const response = JSON.parse(this.responseText);
                     resolve(response)
-                    // alert("ok")
-                    // console.log(response);
-                    // console.log(this);
                 }
             };
             request.open("POST", url);
