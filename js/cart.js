@@ -5,6 +5,18 @@ let localStorageCartContent = [];
 let consolidatedList = [];
 let totalCost = 0;
 let serverProductList = [];
+let serverAnswer = [];
+let orderId = '';
+let orderPrice = '0';
+
+class ProductItem { // tableau avec le contenu d'un article (produit)
+    constructor (id, quantity, lense, price) { 
+        this.id = id; // l'id du produit
+        this.quantity = quantity; // la quantité
+        this.lense = lense; // la lentille
+        this.price = price; // le prix
+    }
+}
 
 class contactObject {
     constructor(firstname, lastname, address, city, email){
@@ -108,14 +120,14 @@ function searchSameLense(searchedLense, objectList, candidateItems) {
 }
 
 
-class ProductItem { // tableau avec le contenu d'un article (produit)
-    constructor (id, quantity, lense, price) { 
-        this.id = id; // l'id du produit
-        this.quantity = quantity; // la quantité
-        this.lense = lense; // la lentille
-        this.price = price; // le prix
-    }
-}
+// class ProductItem { // tableau avec le contenu d'un article (produit)
+//     constructor (id, quantity, lense, price) { 
+//         this.id = id; // l'id du produit
+//         this.quantity = quantity; // la quantité
+//         this.lense = lense; // la lentille
+//         this.price = price; // le prix
+//     }
+// }
 
 //-----------------------------------------------
 // Function name:   idCompare
@@ -384,7 +396,6 @@ function formValid() {
 // Outputs:         x
 
 
-
 function checkAndSubmitData(event){
     contact.firstName = event.target.firstname.value; // on cree le tableau de contact
     contact.lastName = event.target.lastname.value;
@@ -393,7 +404,7 @@ function checkAndSubmitData(event){
     contact.email = event.target.email.value;
     console.log(contact);
     
-    let serverAnswer = {};
+    
 
     let formOK = formCheck(event);
 
@@ -403,33 +414,36 @@ function checkAndSubmitData(event){
             let id = localStorageCartContent[i].id;
             products.push(id); // on enregistre i (numéro de ligne dans le tableau d'objet) à la suite du tableau du résultat de recherche
         }
-        console.log(products);
+        // console.log(products);
 
         let orderContentObject = {contact: contact, products: products}
         let orderContent = JSON.stringify(orderContentObject);
-        console.log(orderContentObject);
-        console.log(orderContent);
+        // console.log(orderContentObject);
+        // console.log(orderContent);
+
         ajax.post('http://localhost:3000/api/cameras/order',orderContent).then((response) => { // on envoie les donnees au serveur
-           serverAnswer = response;
-            // on attend la confirmation
+            // serverAnswer = response;
+            console.log(response)
+            orderId = response.orderId
+            console.log(orderId)
+
+            orderPrice = 0; 
+            let orderedProducts = response.products
+
+            for(let i = 0; i < orderedProducts.length; i++){
+                orderPrice = orderPrice + orderedProducts[i].price;
+                console.log(orderPrice)
+            }
+
+            let newCartContent = [] // on crée une nouvelle liste vide
+            localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript. On écrasse le panier stocké en local avec le nouv contenu du panier(un produit en moins ou tout effacé)
+
+            document.location.assign('command.html?orderId='+ orderId+ '&orderPrice='+ orderPrice); // Suite a la confirmation du serveur, on envoie l'id de la commande et le prix total vers la page de confirmation de commande
         }, (err) => {
             console.log(err)
         })
-        console.log(serverAnswer);
-
-        let orderId = 'monnumérodecommande';
-        let orderPrice = '60000';
-        
-        document.location.assign('command.html?orderId='+ orderId+ '&orderPrice='+ orderPrice); // Suite a la confirmation du serveur, on envoie l'id de la commande et le prix total vers la page de confirmation de commande
-
-        let newCartContent = [] // on crée une nouvelle liste vide
-        localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript. On écrasse le panier stocké en local avec le nouv contenu du panier(un produit en moins ou tout effacé)
     }
-    console.log('on est arrivée là?')
-    console.log(serverAnswer);
 }
-
-
 
 
 //-----------------------------------------------

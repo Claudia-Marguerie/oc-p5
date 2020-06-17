@@ -697,7 +697,15 @@ button:hover {
   display: flex;
 }
 #command-text .validation-text .data-command p {
+  font-weight: 600;
   margin-right: 10px;
+  color: #85c6c8;
+}
+#command-text .validation-text .data-command .panier-total {
+  color: #000000;
+}
+#command-text .validation-text .data-command .order-number {
+  color: #000000;
 }
 @media screen and (max-width: 768px) {
   #command-text .validation-text {

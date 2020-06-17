@@ -25,7 +25,15 @@
         .data-command {
             display: flex;
             p {
+                font-weight: 600;
                 margin-right: 10px;
+                color: $clr-secondary;
+            }
+            .panier-total {
+                color: #000000;
+            }
+            .order-number {
+                color: #000000;
             }
         }
         @media screen and (max-width: 768px) {
