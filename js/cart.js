@@ -20,11 +20,11 @@ class ProductItem { // tableau avec le contenu d'un article (produit)
 
 class contactObject {
     constructor(firstname, lastname, address, city, email){
-        this.firstname = "";
-        this.lastname = "";
-        this.address = "";
-        this.city = "";
-        this.email = "";
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.city = city;
+        this.email = email;
     }
 }
 
@@ -380,9 +380,9 @@ function separateThousands(nb) { // Function pour séparer les milliers des chif
 }
 
 //-----------------------------------------------
-// Function name:   x
+// Function name:   formValid
 // Description:     x
-// Inputs:          x
+// Inputs:          -
 // Outputs:         x
 
 function formValid() { 
@@ -391,54 +391,53 @@ function formValid() {
 
 //-----------------------------------------------
 // Function name:   checkAndSubmitData
-// Description:     x
+// Description:     Vérifier que le formulaire est conforme et envoyer la commande au serveur
 // Inputs:          x
 // Outputs:         x
 
 
 function checkAndSubmitData(event){
-    contact.firstName = event.target.firstname.value; // on cree le tableau de contact
+    contact.firstName = event.target.firstname.value; // on cree le tableau de contact avec les donnés entrées dans le formulaire
     contact.lastName = event.target.lastname.value;
     contact.address = event.target.address.value;
     contact.city = event.target.city.value;
     contact.email = event.target.email.value;
     console.log(contact);
     
-    
-
-    let formOK = formCheck(event);
+    let formOK = formCheck(event); // on stock le résultat de la vérification du formulaire 
 
     if (formOK && localStorageCartContent.length != 0){ // Si le formulaire à un bon format et si le panier n'est pas vide (rajouter)
         products = []; // on cree le tableau panier
         for(i = 0; i < localStorageCartContent.length; i++){
-            let id = localStorageCartContent[i].id;
+            let id = localStorageCartContent[i].id; // on ajoute l'id du produit i dans la liste du panier
             products.push(id); // on enregistre i (numéro de ligne dans le tableau d'objet) à la suite du tableau du résultat de recherche
         }
         // console.log(products);
 
-        let orderContentObject = {contact: contact, products: products}
-        let orderContent = JSON.stringify(orderContentObject);
+        let orderContentObject = {contact: contact, products: products} // on crée un objet contenant l'objet contact et l'objet product pour envoyer au serveur
+        let orderContent = JSON.stringify(orderContentObject); // on le transforme en string
         // console.log(orderContentObject);
         // console.log(orderContent);
 
-        ajax.post('http://localhost:3000/api/cameras/order',orderContent).then((response) => { // on envoie les donnees au serveur
+        ajax.post('http://localhost:3000/api/cameras/order',orderContent).then((response) => { // on envoie les données au serveur
             // serverAnswer = response;
             console.log(response)
-            orderId = response.orderId
+            orderId = response.orderId // on stock l'identifiant de la commande donné par le serveur
             console.log(orderId)
 
-            orderPrice = 0; 
-            let orderedProducts = response.products
+            orderPrice = 0; // on crée une variable pour recalculer le prix
+            let orderedProducts = response.products // on récupère la liste des produits commandées
 
-            for(let i = 0; i < orderedProducts.length; i++){
-                orderPrice = orderPrice + orderedProducts[i].price;
+            for(let i = 0; i < orderedProducts.length; i++){ // boucle pour calculer le prix total de la commande
+                orderPrice = orderPrice + orderedProducts[i].price; // on adissione les prix des produits i dans la liste commandée
                 console.log(orderPrice)
             }
 
             let newCartContent = [] // on crée une nouvelle liste vide
-            localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript. On écrasse le panier stocké en local avec le nouv contenu du panier(un produit en moins ou tout effacé)
+            localStorage.setItem("storedCartContent", JSON.stringify(newCartContent)) // on converti la liste en string pour qu'elle soit lisible par javascript. On écrasse le panier stocké en local avec le panier à 0
 
-            document.location.assign('command.html?orderId='+ orderId+ '&orderPrice='+ orderPrice); // Suite a la confirmation du serveur, on envoie l'id de la commande et le prix total vers la page de confirmation de commande
+            document.location.assign('command.html?orderId='+ orderId+ '&orderPrice='+ orderPrice); // on envoie l'id de la commande et le prix total vers la page de confirmation de commande
+            
         }, (err) => {
             console.log(err)
         })
@@ -447,13 +446,12 @@ function checkAndSubmitData(event){
 
 
 //-----------------------------------------------
-// Function name:   x
+// Function name:   formCheck
 // Description:     x
 // Inputs:          x
 // Outputs:         x
 
 function formCheck(event) {
-    //let event2 = event;
     event.preventDefault()
     console.log('hello, event en dessous')
     console.log(event)
@@ -464,12 +462,6 @@ function formCheck(event) {
     let city = event.target.city;
     let email = event.target.email;
 
-    // let missFirstName = document.getElementById('missFirstName');
-    // let missLastName = document.getElementById('missLastName');
-    // let missAddress = document.getElementById('missAddress');
-    // let missCity = document.getElementById('missCity');
-    // let missEmail = document.getElementById('missEmail');
-
     let firstNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let lastNameValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let addressValid = /^[0-9]+\s[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+).{1,30}?$/;
@@ -478,93 +470,48 @@ function formCheck(event) {
 
     if (firstName.validity.valueMissing) { // Si le champ 'prénom' est vide
         event.preventDefault();
-        // missFirstName.textContent = "Ce champ est obligatoire : prénom manquant";
         formOK = false;
     } else if (firstNameValid.test(firstName.value) == false) { // Si le format est incorrect
         event.preventDefault();
-        // missFirstName.textContent = 'Format incorrect';
         formOK = false;
     } else {
-        // missFirstName.textContent = '';
     }
 
     if (lastName.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
-        // missLastName.textContent = 'Ce champ est obligatoire : nom manquant';
         formOK = false;
     } else if (lastNameValid.test(lastName.value) == false) { // Si le format est incorrect
         event.preventDefault();
-        // missLastName.textContent = 'Format incorrect';
         formOK = false;
     } else {
-        // missLastName.textContent = '';
     }
 
     if (address.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
-        // missAddress.textContent = 'Ce champ est obligatoire : adresse manquante';
         formOK = false;
     } else if (addressValid.test(address.value) == false) { // Si le format est incorrect
         event.preventDefault();
-        // missAddress.textContent = 'Format incorrect';
         formOK = false;
     } else {
-        // missAddress.textContent = '';
     }
 
     if (city.validity.valueMissing) { // Si le champ 'nom' est vide
         event.preventDefault();
-        // missCity.textContent = 'Ce champ est obligatoire : ville manquante';
         formOK = false;
     } else if (cityValid.test(city.value) == false) { // Si le format est incorrect
         event.preventDefault();
-        // missCity.textContent = 'Format incorrect';
         formOK = false;
     } else {
-        // missCity.textContent = '';
     }
 
     if (email.validity.valueMissing) { // Si le champ 'e-mail' est vide
         event.preventDefault();
-        // missEmail.textContent = 'Ce champ est obligatoire : e-mail manquant';
         formOK = false;
     } else if (emailValid.test(email.value) == false) { // Si le format est incorrect
         event.preventDefault();
-        // missEmail.textContent = 'Format incorrect';
         formOK = false;
     } else {
-        // missEmail.textContent = '';
     }
     console.log("test du formulaire par le JS est OK? " + formOK)
     return formOK;
 }
-
-
-//     const form = document.querySelector('form');
-
-//     form.addEventListener('submit', (event) =>{
-//         event.preventDefault()
-//         console.log('Prénom:', event.target.firstname)
-//         console.log('Nom:', event.target.lastname)
-//         console.log('Adresse:', event.target.address)
-//         console.log('Ville:', event.target.city)
-//         console.log('Email:', event.target.email)
-//     })
-
-
-//     const inputs = document.querySelectorAll("input")
-//     const checkValidity = (input) => {
-//         input.addEventListener('invalid', (e) => {
-//             e.preventDefault()
-//             if (!e.target.validity.valid) {
-//                 e.target.parentElement.classList.add('error')
-//             }
-//         })
-//         input.addEventListener('input', (e) => {
-//             if (e.target.validity.valid) {
-//                 e.target.parentElement.classList.remove('error')
-//             }
-//         })
-//     }
-
-//     Array.from(inputs).forEach(checkValidity);

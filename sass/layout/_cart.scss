@@ -7,7 +7,7 @@
     }
 }
 
-// Produits ajoutés au panier
+// Products added to cart
 #mon-panier {
     display: flex;
     justify-content: center;
@@ -18,7 +18,6 @@
 #panier-products-formulaire {
     display: flex;
     flex-direction: column;
-    // align-items: center;
     width: 80%;
     margin-bottom: 120px;
     @media screen and (max-width: 1024px) {
@@ -33,9 +32,6 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        // @media screen and (max-width: 768px) {
-        //     font-size: 0.8em;
-        // }
         @media screen and (max-width: 998px) {
             display: flex;
             flex-direction: column;
@@ -63,9 +59,6 @@
                 width: 240px;
                 height: 160px;
                 margin: 10px 0;
-                // @media screen and (max-width: 998px) {
-                //     width: 180px;
-                // }
             }
             p {
                 margin-top: 40px;
@@ -99,7 +92,6 @@
         width: 25px;
     }
 }
-
 
 // Formulaire
 #formulaire {
@@ -139,12 +131,6 @@
             font-weight: bolder;
             margin: auto;
         } 
-        // #validation-cart {
-        //     width: 40%;
-        //     @media screen and (max-width: 425px) {
-        //         width: 80%;
-        //     }
-        // }
         button {
             margin: 20px 0 0 0;
             display: flex;
@@ -160,7 +146,6 @@
 
 // Total panier
 #panier-total {
-    // width: 30%;
     height: auto;
     margin: 10px 30px 30px 30px;
     display: flex;
@@ -176,8 +161,6 @@
         }
         .cout-panier {
             display: flex;
-            // justify-content: space-between;
-            // margin-bottom: 20px;
             &--bold {
                 font-weight: bold;
                 color: $clr-secondary;
@@ -191,7 +174,6 @@
         width: 30%;
         display: flex;
         font-weight: 900;
-        // justify-content: end;
         align-items: flex-end;
         @media screen and (max-width: 998px) {
             width: 100%;
@@ -229,19 +211,3 @@
     font-size: 2em;
     color: $clr-secondary;
 }
-
-// .image-info {
-//     display: flex;
-//     justify-content: space-around;
-//     align-items: center;
-//     width: 100%;
-//     margin: 10px;
-// }
-
-// .groupe-info {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     width: 100%;
-//     margin: 10px;
-// }

@@ -124,7 +124,6 @@ nav {
   position: relative;
   margin-bottom: 30px;
   overflow: hidden;
-  // font-size: 0;
   line-height: 0;
   display: flex;
   flex-wrap: wrap;
@@ -138,9 +137,6 @@ nav {
   a {
     text-decoration: none;
     text-decoration-color: none;
-    // position: relative;
-    // right: -50%;
-    // font-size: 1.4em;
   }
   &:hover {
     .product-name-price {
@@ -169,10 +165,8 @@ nav {
     font-size: 1.3em;
     line-height: 1.5em;
     padding-left: 15px;
-    // color:$clr-secondary-dark;
     color: #000000;
     width: 50%;
-    // font-family: $typhography-primary;
   }
   p {
     font-size: 1.3em;
@@ -180,8 +174,6 @@ nav {
     font-weight: bolder;
     padding-right: 15px;
     width: 50%;
-    // color: #000000;
-    // font-family: $typhography-primary;
   }
 }
 

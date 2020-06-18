@@ -12,12 +12,8 @@
 // menu
 nav {
     @media screen and (max-width: 648px) {
-        // font-size: 1em;
         flex-direction: column;
         align-items: flex-start;
-        // .panier {
-        //     margin-top: 20px;
-        // }
     }
 }
 
@@ -50,15 +46,12 @@ nav {
         height: 420px;
         margin-right: 20px;
         overflow: hidden;
-        // position: relative;
-        // right: -50%;
         #product-image {
             width: auto;
             height: 420px;
             position: relative;
             left: 50%;
             margin-left: -320px;
-            // margin-right: 20px;
             transform: scale(1);
             transition: all 500ms ease-in-out;
             &:hover {
@@ -109,7 +102,6 @@ nav {
 }
 
 .product-information {
-    // background-color: $clr-primary;
     width: 340px;
     height: 420px;
     padding: 0 20px;
@@ -136,7 +128,6 @@ select {
     margin-top: 10px;
     font-size: 0.8em;
     font-family: $typhography-primary;
-    // background-color: rgba($color: $clr-primary, $alpha: 0.4);
     border: solid 1px $clr-primary;
 }
 
@@ -149,7 +140,6 @@ button {
     margin-top: 40px;
     text-align: center;
     text-decoration: none;
-    // display: inline-block;
     font-size: 1.2em;
     font-family: $typhography-primary;
     &:hover {

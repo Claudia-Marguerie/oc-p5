@@ -693,6 +693,11 @@ button:hover {
 #command-text .validation-text h2 {
   text-align: center;
 }
+@media screen and (max-width: 768px) {
+  #command-text .validation-text h2 {
+    font-size: 1.3em;
+  }
+}
 #command-text .validation-text .data-command {
   display: flex;
 }

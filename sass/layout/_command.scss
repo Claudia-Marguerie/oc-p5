@@ -21,6 +21,9 @@
         padding: 30px;
         h2 {
             text-align: center;
+            @media screen and (max-width: 768px) {
+                font-size: 1.3em;
+            }
         }
         .data-command {
             display: flex;
