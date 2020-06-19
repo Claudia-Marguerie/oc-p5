@@ -29,7 +29,6 @@ class contactObject {
 }
 
 let contact = new contactObject()
-console.log(contact);
 
 //------------------------------------ Execution -----------------------
 
@@ -57,7 +56,6 @@ function getCartFromLocal() {
         localStorageCartContent = [] // on crée un tableau
     } else {
         localStorageCartContent = JSON.parse(localStorageCartContent) // on transforme le contenu en un tableau d'objet (pour que soit lisible par JS)
-        // console.log(localStorageCartContent)
     }
 }
 
@@ -225,7 +223,7 @@ function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTy
                             '<h3>PRIX</h3>'+
                         '</div>'+
                         '<div class="product-info">'+
-                            '<p class="product-price">' + separateThousands(itemTypeCost) + ' €</p>'+ // on utilise la variable pricePerItem
+                            '<p class="product-price">' + new Intl.NumberFormat().format(itemTypeCost) + ' €</p>'+ // on utilise la variable pricePerItem
                         '</div>'+
                     '</div>'+
                     '<div class="btn-remove">'+
@@ -242,8 +240,8 @@ function displayCartItems(i, consolidatedListItem, itemServerInformation, itemTy
 // Outputs:         l'addition des prix des produits dans le panier
 
 function displayTotalCost () { 
-    document.querySelector('.total-cost').textContent = separateThousands(totalCost) + ' €' // l'émplacement à afficher le prix total
-    document.querySelector('.panier-total--cost').textContent = separateThousands(totalCost) + ' €' // l'émplacement à afficher le prix total
+    document.querySelector('.total-cost').textContent = new Intl.NumberFormat().format(totalCost) + ' €' // l'émplacement à afficher le prix total
+    document.querySelector('.panier-total--cost').textContent = new Intl.NumberFormat().format(totalCost) + ' €' // l'émplacement à afficher le prix total
 }
 
 //-----------------------------------------------
@@ -342,25 +340,6 @@ function displayProductListInformation(){
     displayTotalCost()
 }
 
-//-----------------------------------------------
-// Function name:   separateThousands
-// Description:     sépare les milliers des chiffres
-// Inputs:          nombre non séparé (number or string)
-// Outputs:         nombre avec chiffres séparés 3 par 3 (string)
-
-function separateThousands(nb) { // Function pour séparer les milliers des chiffres
-    let nbs = nb.toString(); // on convertit en string
-    let sepNb = ''; // on crée une string vide
-    let longNb = nbs.length; // on calcule le nombre des chiffres dans le nombre initial
-    for(i = 0; i < longNb; i++){ // pour tous les chiffres du nombre initial
-        sepNb = sepNb + nbs[i]; // on tranfère le chiffre i du nombre initial vers la nouvelle string
-        let chiffresRestants = longNb - (i + 1); // on calcule le nombre de chiffres restants à transfèrer
-        if (((chiffresRestants % 3) == 0) && (chiffresRestants > 0)){ // si le nombre de chiffre à tranfèrer est multiple de 3 et qui resente encore des chiffres à transferer 
-            sepNb = sepNb + ' '; // on ajoute un space
-        }     
-    }
-    return sepNb; // on sort une string
-}
 
 //-----------------------------------------------
 // Function name:   formValid
