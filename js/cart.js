@@ -420,49 +420,14 @@ function formCheck(event) {
     let cityValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
     let emailValid = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 
-    if (firstName.validity.valueMissing) { // Si le champ 'prénom' est vide
+    if (firstName.validity.valueMissing || (firstNameValid.test(firstName.value) == false) ||
+        lastName.validity.valueMissing || (lastNameValid.test(lastName.value) == false) ||
+        address.validity.valueMissing || (addressValid.test(address.value) == false) ||
+        city.validity.valueMissing || (cityValid.test(city.value) == false) ||
+        email.validity.valueMissing || (emailValid.test(email.value) == false)
+        ) { // Si le champ 'prénom' est vide
         event.preventDefault();
         formOK = false;
-    } else if (firstNameValid.test(firstName.value) == false) { // Si le format est incorrect
-        event.preventDefault();
-        formOK = false;
-    } else {
-    }
-
-    if (lastName.validity.valueMissing) { // Si le champ 'nom' est vide
-        event.preventDefault();
-        formOK = false;
-    } else if (lastNameValid.test(lastName.value) == false) { // Si le format est incorrect
-        event.preventDefault();
-        formOK = false;
-    } else {
-    }
-
-    if (address.validity.valueMissing) { // Si le champ 'nom' est vide
-        event.preventDefault();
-        formOK = false;
-    } else if (addressValid.test(address.value) == false) { // Si le format est incorrect
-        event.preventDefault();
-        formOK = false;
-    } else {
-    }
-
-    if (city.validity.valueMissing) { // Si le champ 'nom' est vide
-        event.preventDefault();
-        formOK = false;
-    } else if (cityValid.test(city.value) == false) { // Si le format est incorrect
-        event.preventDefault();
-        formOK = false;
-    } else {
-    }
-
-    if (email.validity.valueMissing) { // Si le champ 'e-mail' est vide
-        event.preventDefault();
-        formOK = false;
-    } else if (emailValid.test(email.value) == false) { // Si le format est incorrect
-        event.preventDefault();
-        formOK = false;
-    } else {
-    }
+    } 
     return formOK;
 }
